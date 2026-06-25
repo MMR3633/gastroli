@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Гастроли — выездные детские мероприятия для садов, школ и лагерей</title>
+<title>Гастроли, выездные детские мероприятия для садов, школ и лагерей</title>
 <meta name="description" content="Маркетплейс выездных детских мероприятий: спектакли, шоу, планетарии и мастер-классы для садов, школ и лагерей. Проверенные организаторы, договор и безнал.">
 <meta name="theme-color" content="#6D3B8E">
 <link rel="manifest" href="./manifest.json">
@@ -97,7 +97,7 @@ body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px
           <div style="min-width:260px">
             <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);padding:6px 13px;border-radius:30px;font-size:12.5px;font-weight:600;margin-bottom:18px;backdrop-filter:blur(4px)">🎪 Маркетплейс выездных детских мероприятий</div>
             <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1;letter-spacing:-.025em;margin:0 0 14px">Сцена приедет<br><span style="color:#F5A524">к вам</span></h1>
-            <p style="font-size:16.5px;line-height:1.55;color:rgba(255,255,255,.85);margin:0 0 22px;max-width:520px">Спектакли, шоу, планетарии и мастер-классы для садов и школ. Одна заявка — весь праздник, с договором и безналом.</p>
+            <p style="font-size:16.5px;line-height:1.55;color:rgba(255,255,255,.85);margin:0 0 22px;max-width:520px">Спектакли, шоу, планетарии и мастер-классы для садов и школ. Одна заявка, весь праздник, с договором и безналом.</p>
             <div style="display:flex;align-items:center;gap:10px;background:#fff;border-radius:15px;padding:7px 7px 7px 16px;max-width:480px;box-shadow:0 12px 30px rgba(0,0,0,.24)">
               <span style="font-size:17px">🔎</span>
               <input value="{{ q }}" onInput="{{ onQ }}" placeholder="Спектакль, шоу, планетарий…" style="flex:1;border:0;outline:none;font-family:Manrope;font-size:15px;color:#211A2E;background:none;padding:9px 0;min-width:60px" />
@@ -148,7 +148,7 @@ body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px;padding:14px 16px;background:#fff;border:1px solid #EAE1D4;border-radius:14px">
         <label style="font-size:12.5px;color:#6f6878;font-weight:600;display:flex;align-items:center;gap:6px">Возраст
           <select value="{{ fAge }}" onChange="{{ onAge }}" style="font-family:Manrope;font-size:13px;border:1px solid #EAE1D4;border-radius:9px;padding:7px 9px;background:#FBF7F0;color:#211A2E;cursor:pointer">
-            <option value="all">любой</option><option value="3-5">3–5 лет</option><option value="6-8">6–8 лет</option><option value="9-12">9–12 лет</option>
+            <option value="all">любой</option><option value="3-5">3-5 лет</option><option value="6-8">6-8 лет</option><option value="9-12">9-12 лет</option>
           </select>
         </label>
         <label style="font-size:12.5px;color:#6f6878;font-weight:600;display:flex;align-items:center;gap:6px">Город
@@ -166,7 +166,7 @@ body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px
 
       <div style="display:flex;align-items:flex-start;gap:9px;margin:-12px 2px 20px;font-size:12.5px;color:#6f6878;line-height:1.45">
         <span style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#2E9E6B;color:#fff;font-size:11px;margin-top:1px">✓</span>
-        <span>Значок <b style="color:#2E9E6B">Проверено</b> — платформа проверила юрлицо, договор-оферту, <b>медкнижки артистов</b> (медосмотр по СанПиН) и страховку ответственности. Подробности — в карточке услуги.</span>
+        <span>Значок <b style="color:#2E9E6B">Проверено</b>,платформа проверила юрлицо, договор-оферту, <b>медкнижки артистов</b> (медосмотр по СанПиН) и страховку ответственности. Подробности, в карточке услуги.</span>
       </div>
 
       <!-- poster wall -->
@@ -302,7 +302,7 @@ body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px
           <div style="background:#fff;border:1px solid #EAE1D4;border-radius:14px;padding:18px 20px">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-family:'JetBrains Mono';color:#F5A524;font-size:13px">{{ r.stars }}</span><span style="font-weight:700;font-size:14px">{{ r.garden }}</span><span style="font-size:12px;color:#8a8194">· {{ r.date }}</span></div>
             <p style="margin:0;font-size:14.5px;line-height:1.55;color:#3d3548">{{ r.text }}</p>
-            <div style="font-size:12.5px;color:#8a8194;margin-top:8px">— {{ r.author }}</div>
+            <div style="font-size:12.5px;color:#8a8194;margin-top:8px">· {{ r.author }}</div>
           </div>
         </sc-for>
       </div>
@@ -499,7 +499,7 @@ body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px
     <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ no }}">
     <section style="animation:fadeIn .35s ease;padding-top:24px">
       <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Документы</h1>
-      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Загрузите допуски — садам важно видеть, что вы проверены</p>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Загрузите допуски, садам важно видеть, что вы проверены</p>
       <button onClick="{{ onDrop }}" style="width:100%;border:2px dashed #C9B8DC;background:#F7F1FA;border-radius:18px;padding:38px 20px;text-align:center;cursor:pointer;margin-bottom:24px;font-family:inherit;transition:border-color .2s" style-hover="border-color:#6D3B8E">
         <div style="font-size:38px;margin-bottom:8px">📤</div>
         <div style="font-family:Unbounded;font-weight:700;font-size:17px;margin-bottom:4px">Перетащите файлы сюда</div>
@@ -805,7 +805,7 @@ class Component extends DCLogic {
     const con = ['Площадка от 4×3 м (зал или группа)','Розетка 220В рядом со сценой','30 минут на монтаж до начала','Возможность затемнить помещение'];
     this._inc=inc; this._con=con;
     this.services = [
-      {id:'s1',title:'Кот в сапогах',org:'Театр «Балаганчик»',orgId:'t1',cat:'theatre',a1:3,a2:7,price:18000,dur:45,city:'Москва',rating:'4.9',reviews:124,verified:true,img:'1503095396549-807759245b35',desc:'Музыкальный спектакль по мотивам сказки Шарля Перро. Живые декорации, яркие костюмы и интерактив с залом — дети помогают Коту перехитрить Людоеда.',includes:inc,conditions:con},
+      {id:'s1',title:'Кот в сапогах',org:'Театр «Балаганчик»',orgId:'t1',cat:'theatre',a1:3,a2:7,price:18000,dur:45,city:'Москва',rating:'4.9',reviews:124,verified:true,img:'1503095396549-807759245b35',desc:'Музыкальный спектакль по мотивам сказки Шарля Перро. Живые декорации, яркие костюмы и интерактив с залом, дети помогают Коту перехитрить Людоеда.',includes:inc,conditions:con},
       {id:'s2',title:'Снежная королева',org:'Театр «Балаганчик»',orgId:'t1',cat:'theatre',a1:5,a2:10,price:22000,dur:50,city:'Москва',rating:'4.8',reviews:89,verified:true,img:'1485846234645-a62644f84728',desc:'Новогодний спектакль с эффектом снега, проекциями и хороводом у ёлки. Идеален для утренников и зимних праздников.',includes:inc,conditions:con},
       {id:'s11',title:'Теневой театр «Сказки народов»',org:'Студия «Лучик»',orgId:'t5',cat:'theatre',a1:4,a2:9,price:15000,dur:40,city:'Королёв',rating:'4.7',reviews:38,verified:true,img:'1517457373958-b7bdd4587205',desc:'Камерный теневой театр: силуэты оживают на большом экране под живое озвучивание. Завораживает даже самых непосед.',includes:inc,conditions:con},
       {id:'s5',title:'Шоу мыльных пузырей',org:'Артель «Фейерверк»',orgId:'t2',cat:'show',a1:3,a2:8,price:14000,dur:40,city:'Москва',rating:'4.8',reviews:203,verified:true,img:'1514525253161-7a46d19cd819',desc:'Гигантские пузыри, дым-машина и ребёнок внутри пузыря. Восторг и тысячи фотографий гарантированы.',includes:inc,conditions:con},
@@ -824,15 +824,15 @@ class Component extends DCLogic {
         desc:'Профессиональный детский театр. Выездные спектакли с полным комплектом декораций, костюмов и звука. Все артисты с медкнижками, работаем по договору и принимаем безналичную оплату от учреждений.',
         docs:[okDoc('Выписка ЕГРЮЛ','12.01.2026'),okDoc('Договор оферты','03.02.2026'),okDoc('Медкнижки артистов','20.11.2025'),{type:'Программа по СанПиН',date:'на модерации',status:'mod'}],
         reviewList:[
-          {garden:'Детский сад №34, Москва',author:'Марина В., воспитатель',rating:5,text:'Дети были в восторге! Артисты приехали вовремя, всё своё — декорации, костюмы, звук. Закрыли все документы для заведующей.',date:'июнь 2026'},
-          {garden:'Школа №1287',author:'Ольга К., завуч',rating:5,text:'Спектакль на Новый год организован идеально. Договор, безнал, чек — бухгалтерия довольна. Будем заказывать ещё.',date:'январь 2026'},
+          {garden:'Детский сад №34, Москва',author:'Марина В., воспитатель',rating:5,text:'Дети были в восторге! Артисты приехали вовремя, всё своё, декорации, костюмы, звук. Закрыли все документы для заведующей.',date:'июнь 2026'},
+          {garden:'Школа №1287',author:'Ольга К., завуч',rating:5,text:'Спектакль на Новый год организован идеально. Договор, безнал, чек, бухгалтерия довольна. Будем заказывать ещё.',date:'январь 2026'},
           {garden:'Сад «Радуга», Химки',author:'Елена П.',rating:4,text:'Отличная программа, дети довольны. Немного задержались на въезде, но предупредили заранее.',date:'май 2026'},
         ]},
       t2:{name:'Артель «Фейерверк»',cat:'show',rating:'4.8',reviews:351,territory:'Москва, Химки, Мытищи',years:'на платформе с 2015',cover:'1533174072545-7a4b6ad7a6c3',
-        desc:'Команда шоуменов и научных аниматоров. Делаем яркие интерактивные программы для праздников любого масштаба — от группы до актового зала.',
+        desc:'Команда шоуменов и научных аниматоров. Делаем яркие интерактивные программы для праздников любого масштаба, от группы до актового зала.',
         docs:[okDoc('Выписка ЕГРИП','08.02.2026'),okDoc('Договор оферты','08.02.2026'),okDoc('Сертификаты безопасности','14.12.2025')],
         reviewList:[
-          {garden:'Сад №51, Москва',author:'Анна Т.',rating:5,text:'Шоу пузырей — это что-то невероятное. Заказывали на выпускной, дети визжали от счастья.',date:'июнь 2026'},
+          {garden:'Сад №51, Москва',author:'Анна Т.',rating:5,text:'Шоу пузырей, это что-то невероятное. Заказывали на выпускной, дети визжали от счастья.',date:'июнь 2026'},
           {garden:'Лицей №2, Химки',author:'Дмитрий Р.',rating:5,text:'Научное шоу «Взрыв» прошло на ура. Безопасно, зрелищно, познавательно.',date:'апрель 2026'},
         ]},
       t3:{name:'«Космо-Тур»',cat:'science',rating:'4.9',reviews:249,territory:'Москва и ближнее Подмосковье',years:'на платформе с 2018',cover:'1444703686981-a3abbc4d4fe3',
@@ -852,13 +852,13 @@ class Component extends DCLogic {
         desc:'Камерный теневой и кукольный театр. Тихие, атмосферные спектакли для самых маленьких зрителей.',
         docs:[okDoc('Выписка ЕГРИП','17.01.2026'),okDoc('Договор оферты','17.01.2026'),{type:'Медкнижки',date:'на модерации',status:'mod'}],
         reviewList:[
-          {garden:'Сад «Колокольчик», Королёв',author:'Светлана Д.',rating:5,text:'Теневой театр — необычно и красиво. Малыши сидели тихо весь спектакль, что само по себе чудо.',date:'апрель 2026'},
+          {garden:'Сад «Колокольчик», Королёв',author:'Светлана Д.',rating:5,text:'Теневой театр, необычно и красиво. Малыши сидели тихо весь спектакль, что само по себе чудо.',date:'апрель 2026'},
         ]},
     };
     this.ads = [
-      {icon:'🏫',title:'Для садов: одна заявка — весь праздник',sub:'Выбрали, забронировали, оплатили по безналу. Без обзвона и поиска.'},
+      {icon:'🏫',title:'Для садов: одна заявка, весь праздник',sub:'Выбрали, забронировали, оплатили по безналу. Без обзвона и поиска.'},
       {icon:'🎭',title:'Для театров: брони без поиска клиентов',sub:'Сады находят вас сами. Вы только подтверждаете дату в чате.'},
-      {icon:'🤝',title:'Прозрачная комиссия — всего 10%',sub:'Платформа берёт процент только с проведённых мероприятий.'},
+      {icon:'🤝',title:'Прозрачная комиссия, всего 10%',sub:'Платформа берёт процент только с проведённых мероприятий.'},
     ];
     this.state = {
       role:'sad', route:'vitrina', q:'', fCat:'all', fAge:'all', fCity:'all',
@@ -898,7 +898,7 @@ class Component extends DCLogic {
   money(n){ return n.toLocaleString('ru-RU')+'\u00A0\u20BD'; }
   img(id){ return 'https://images.unsplash.com/photo-'+id+'?w=720&q=75&auto=format&fit=crop'; }
   svcById(id){ return this.services.find(s=>s.id===id); }
-  ageStr(s){ return s.a1+'–'+s.a2+' лет'; }
+  ageStr(s){ return s.a1+'-'+s.a2+' лет'; }
   hexA(h,a){ const n=parseInt(h.slice(1),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
   heroPosters(){
     const feat=[
@@ -1005,7 +1005,7 @@ class Component extends DCLogic {
       checks:[
         {icon:'🏛️',t:'Юрлицо проверено',s:'Действующая выписка ЕГРЮЛ / ЕГРИП'},
         {icon:'📄',t:'Договор-оферта',s:'Работаем официально, с закрывающими'},
-        {icon:'🩺',t:'Медкнижки артистов',s:'Все прошли медосмотр — требование СанПиН'},
+        {icon:'🧑‍⚕️',t:'Медкнижки артистов',s:'Все прошли медосмотр, требование СанПиН'},
         {icon:'🛡️',t:'Страховка ответственности',s:'На случай форс-мажора на площадке'},
       ],
     };
@@ -1018,7 +1018,7 @@ class Component extends DCLogic {
       if(st==='mod') return {badge:'⏳ Модерация',badgeStyle:'background:#FBF1DE;color:#b07d12;font-weight:600;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;font-family:Manrope'};
       return {badge:'✕ Отклонён',badgeStyle:'background:#FBEAE8;color:#b53b30;font-weight:600;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;font-family:Manrope'};
     };
-    const dIcon=t=>t.includes('ЕГР')?'🏛️':t.includes('Договор')?'📄':t.includes('Медкниж')||t.includes('Медосм')?'🩺':t.includes('страх')||t.includes('Страх')?'🛡️':t.includes('Пожар')?'🔥':t.includes('СанПиН')||t.includes('Сертиф')?'📋':'📎';
+    const dIcon=t=>t.includes('ЕГР')?'🏛️':t.includes('Договор')?'📄':t.includes('Медкниж')||t.includes('Медосм')?'🧑‍⚕️':t.includes('страх')||t.includes('Страх')?'🛡️':t.includes('Пожар')?'🔥':t.includes('СанПиН')||t.includes('Сертиф')?'📋':'📎';
     const org={
       name:o.name,catLabel:om.label,color:om.color,desc:o.desc,territory:o.territory,years:o.years,
       rating:o.rating,reviews:o.reviews,cover:coverOf(o),
@@ -1060,7 +1060,7 @@ class Component extends DCLogic {
       else { st+='background:#fff;color:#211A2E;border:1px solid #EAE1D4'; }
       return {label:sl.busy?(sl.t+' · занято'):sl.t,disabled:dis,style:st,onClick:dis?(()=>{}):(()=>this.setState({book:{...S.book,time:sl.t}}))};
     });
-    const bookWhen=(S.book.date?(S.book.date+' июля'):'—')+(S.book.time?(', '+S.book.time):'');
+    const bookWhen=(S.book.date?(S.book.date+' июля'):'·')+(S.book.time?(', '+S.book.time):'');
     const bookReady=!!(S.book.date&&S.book.time);
 
     // ---- request / chat ----
@@ -1081,7 +1081,7 @@ class Component extends DCLogic {
     const statusSteps=stepLabels.map((l,i)=>({label:l,style:'font-family:JetBrains Mono;font-size:11.5px;padding:5px 11px;border-radius:20px;white-space:nowrap;'+(i<stIdx?'background:#E7F4EE;color:#2E9E6B':i===stIdx?'background:#6D3B8E;color:#fff':'background:#F1ECE3;color:#a89fae')}));
     const statusInfo=S.reqStatus==='confirmed'?{l:'Подтверждена',c:'background:#E7F4EE;color:#2E9E6B'}:{l:'На согласовании',c:'background:#FBF1DE;color:#b07d12'};
     const fee=ar?Math.round(ar.price*0.1):0;
-    const cond=ar?{service:ar.service,garden:ar.garden,when:ar.when,kids:String(ar.kids),venue:ar.venue,price:this.money(ar.price),fee:this.money(fee)}:{service:'—',garden:'—',when:'—',kids:'—',venue:'—',price:'—',fee:'—'};
+    const cond=ar?{service:ar.service,garden:ar.garden,when:ar.when,kids:String(ar.kids),venue:ar.venue,price:this.money(ar.price),fee:this.money(fee)}:{service:'·',garden:'·',when:'·',kids:'·',venue:'·',price:'·',fee:'·'};
 
     // ---- cabinet (sad) ----
     const bookings=S.bookings.map((b,i)=>{
@@ -1156,15 +1156,15 @@ class Component extends DCLogic {
       q:S.q, onQ:e=>this.setState({q:e.target.value}),
       scrollGrid:()=>{const el=document.getElementById('gridanchor');if(el)window.scrollBy({top:el.getBoundingClientRect().top-90,behavior:'smooth'});},
       catChips, ad, adIdx:S.adIdx, adDots, cards,
-      heroTrust:['📄 Договор-оферта','💳 Безнал и закрывающие','🩺 Медкнижки артистов','🛡️ Страховка'],
+      heroTrust:['📄 Договор-оферта','💳 Безнал и закрывающие','🧑‍⚕️ Медкнижки артистов','🛡️ Страховка'],
       heroPosters:this.heroPosters(),
       heroStars:this.heroStars(),
       steps:[
         {n:'1',t:'Выбрали программу',s:'Афиша проверенных команд под ваш возраст и бюджет',bg:'#6D3B8E',delay:'0s'},
-        {n:'2',t:'Согласовали в чате',s:'Дата, площадка, число детей — театр подтверждает',bg:'#F5A524',delay:'.08s'},
+        {n:'2',t:'Согласовали в чате',s:'Дата, площадка, число детей, театр подтверждает',bg:'#F5A524',delay:'.08s'},
         {n:'3',t:'Провели и оплатили',s:'Безнал, договор и закрывающие документы',bg:'#2E9E6B',delay:'.16s'},
       ],
-      verifiedTitle:'«Проверено» — платформа проверила юрлицо (ЕГРЮЛ), договор-оферту, медкнижки артистов и страховку ответственности',
+      verifiedTitle:'«Проверено», платформа проверила юрлицо (ЕГРЮЛ), договор-оферту, медкнижки артистов и страховку ответственности',
       fAge:S.fAge, onAge:e=>this.setState({fAge:e.target.value}),
       fCity:S.fCity, onCity:e=>this.setState({fCity:e.target.value}),
       fPrice:S.fPrice, onPrice:e=>this.setState({fPrice:+e.target.value}), priceLabel:this.money(S.fPrice),
@@ -1188,10 +1188,10 @@ class Component extends DCLogic {
       sendBtnStyle:'width:100%;border:0;border-radius:12px;padding:15px;font-family:Manrope;font-weight:700;font-size:16px;cursor:'+(bookReady?'pointer':'not-allowed')+';'+(bookReady?'background:#F5A524;color:#211A2E;box-shadow:0 3px 0 #c8821a':'background:#3a3348;color:#6f6878'),
       sendRequest:()=>{ if(!bookReady){this.toast('Выберите дату и время');return;} this.submitSadReq(s); },
       // request
-      reqNum:ar?ar.num:'—', statusLabel:statusInfo.l,
+      reqNum:ar?ar.num:'·', statusLabel:statusInfo.l,
       statusBadgeStyle:'font-family:Manrope;font-weight:700;font-size:12px;padding:6px 12px;border-radius:8px;'+statusInfo.c,
       statusSteps, chat, chatInput:S.chatInput, typing:S.typing,
-      chatAvatar:isTeatr?'🏫':'🎭', chatTitle:ar?(isTeatr?ar.garden:ar.org):'—',
+      chatAvatar:isTeatr?'🏫':'🎭', chatTitle:ar?(isTeatr?ar.garden:ar.org):'·',
       onChatType:e=>this.setState({chatInput:e.target.value}),
       onChatKey:e=>{if(e.key==='Enter')this.chatSend();},
       chatSend:()=>this.chatSend(),
@@ -1199,7 +1199,7 @@ class Component extends DCLogic {
       showActions:S.reqStatus!=='confirmed', isConfirmed:S.reqStatus==='confirmed',
       approveLabel:isTeatr?'Подтвердить заявку':'Согласовать условия',
       approve:()=>this.approveReq(),
-      editCond:()=>this.toast('Открыт чат — предложите свои условия театру'),
+      editCond:()=>this.toast('Открыт чат, предложите свои условия театру'),
       backFromReq:()=>this.go(isTeatr?'teatr_home':'cabinet'),
       // cabinet sad
       bookings, sadCount:String(S.bookings.length), sadSpent:this.money(sadSpentN),
@@ -1321,14 +1321,14 @@ class Component extends DCLogic {
         const svc=this.services.find(x=>x.title===ar.service);
         this.setState(s=>({bookings:[{title:ar.service,org:ar.org,cat:svc?svc.cat:'theatre',date:ar.when.split(',')[0],time:ar.when.split(', ')[1]||'',kids:ar.kids,price:ar.price,status:'Подтверждена'},...s.bookings]}));
       }
-      this.toast('Заявка подтверждена ✓ — добавлена в «Мои брони»');
+      this.toast('Заявка подтверждена ✓, добавлена в «Мои брони»');
     } else {
-      this.toast('Заявка подтверждена ✓ — дата в календаре');
+      this.toast('Заявка подтверждена ✓, дата в календаре');
     }
   }
   simUpload(){
     this.setState(s=>({docs2:[...s.docs2,{type:'Новый документ.pdf',date:'загружен только что',status:'mod'}]}));
-    this.toast('Файл загружен — отправлен на модерацию');
+    this.toast('Файл загружен, отправлен на модерацию');
   }
   doPay(){
     this.setState({payStep:'processing'});
