@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гастроли — выездные детские мероприятия для садов, школ и лагерей</title>
+<meta name="description" content="Маркетплейс выездных детских мероприятий: спектакли, шоу, планетарии и мастер-классы для садов, школ и лагерей. Проверенные организаторы, договор и безнал.">
+<meta name="theme-color" content="#6D3B8E">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Гастроли">
+<meta name="mobile-web-app-capable" content="yes">
+<script src="./react.production.min.js"></script>
+<script src="./react-dom.production.min.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#FBF7F0;background-image:radial-gradient(rgba(33,26,46,.022) 1px,transparent 1px);background-size:22px 22px;color:#211A2E;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:#F5A524;color:#211A2E}
+@keyframes floatUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes glow{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8) rotate(0deg)}50%{opacity:.95;transform:scale(1.15) rotate(12deg)}}
+*::-webkit-scrollbar{height:8px;width:8px}*::-webkit-scrollbar-thumb{background:#EAE1D4;border-radius:8px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition:none!important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+  <!-- ===== HEADER / MARQUEE ===== -->
+  <header style="position:sticky;top:0;z-index:50;background:rgba(251,247,240,.86);backdrop-filter:blur(12px);border-bottom:1px solid #EAE1D4">
+    <div style="max-width:1180px;margin:0 auto;padding:12px 20px 12px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <button onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;padding:0;font-family:inherit">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background:#6D3B8E;color:#F5A524;border-radius:11px;font-size:20px;box-shadow:0 2px 0 #4e2867">★</span>
+          <span style="font-family:Unbounded;font-weight:800;font-size:23px;letter-spacing:-.02em;color:#211A2E">Гастроли</span>
+          <span style="font-family:'JetBrains Mono';font-size:10px;color:#8a8194;border:1px solid #EAE1D4;border-radius:6px;padding:2px 6px;letter-spacing:.04em">DEMO</span>
+        </button>
+        <div style="flex:1"></div>
+        <sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ true }}">
+        <div style="display:inline-flex;align-items:center;gap:8px">
+          <div style="display:inline-flex;background:#F1E9DC;border-radius:12px;padding:4px;gap:2px">
+            <button onClick="{{ setSad }}" style="{{ tabSadStyle }}">🏫 Заказчик</button>
+            <button onClick="{{ setTeatr }}" style="{{ tabTeatrStyle }}">🎭 Организатор</button>
+          </div>
+          <button onClick="{{ goAuth }}" style="border:0;border-radius:10px;padding:9px 16px;background:#6D3B8E;color:#fff;font-family:Manrope;font-weight:700;font-size:13.5px;cursor:pointer">Войти</button>
+        </div>
+        </sc-if>
+        <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ no }}">
+        <div style="display:inline-flex;align-items:center;gap:8px">
+          <button onClick="{{ goProfile }}" style="display:inline-flex;align-items:center;gap:8px;border:1px solid #EAE1D4;border-radius:11px;padding:6px 12px 6px 7px;background:#fff;cursor:pointer;font-family:Manrope">
+            <span style="width:30px;height:30px;border-radius:8px;background:#6D3B8E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px">{{ accIcon }}</span>
+            <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.12"><b style="font-size:13px">{{ accName }}</b><span style="font-size:11px;color:#8a8194">{{ accRole }}</span></span>
+          </button>
+          <button onClick="{{ logout }}" title="Выйти" style="border:1px solid #EAE1D4;border-radius:10px;padding:9px 12px;background:#fff;color:#6f6878;font-family:Manrope;font-weight:600;font-size:13px;cursor:pointer">Выйти</button>
+        </div>
+        </sc-if>
+      </div>
+      <nav style="display:flex;gap:6px;overflow-x:auto;padding-bottom:0;scrollbar-width:none">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="3">
+          <button onClick="{{ n.onClick }}" style="{{ n.style }}"><span style="font-size:15px">{{ n.icon }}</span> {{ n.label }}<sc-if value="{{ n.badge }}" hint-placeholder-val="{{ no }}"><span style="margin-left:2px;background:#F2685E;color:#fff;font-family:'JetBrains Mono';font-size:10px;font-weight:600;border-radius:20px;padding:1px 6px">{{ n.badge }}</span></sc-if></button>
+        </sc-for>
+      </nav>
+    </div>
+  </header>
+
+  <main style="flex:1;max-width:1180px;width:100%;margin:0 auto;padding:0 20px 120px">
+
+    <!-- ============ ВИТРИНА ============ -->
+    <sc-if value="{{ isVitrina }}" hint-placeholder-val="{{ true }}">
+    <section style="animation:fadeIn .4s ease">
+      <div style="position:relative;margin:22px 0 16px;background:linear-gradient(135deg,#6D3B8E 0%,#4e2870 55%,#3a1d56 100%);border-radius:24px;overflow:hidden;color:#fff;padding:42px 36px">
+        <div style="position:absolute;top:-40%;left:9%;width:230px;height:170%;background:linear-gradient(180deg,rgba(245,165,36,.3),transparent 70%);transform:rotate(17deg);filter:blur(7px);pointer-events:none;animation:glow 6s ease-in-out infinite"></div>
+        <div style="position:absolute;top:-40%;left:28%;width:170px;height:170%;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 64%);transform:rotate(-12deg);filter:blur(9px);pointer-events:none;animation:glow 7s ease-in-out infinite .6s"></div>
+        <div style="position:absolute;inset:0;background:radial-gradient(circle at 90% 14%, rgba(245,165,36,.3), transparent 46%);pointer-events:none"></div>
+        <sc-for list="{{ heroStars }}" as="st" hint-placeholder-count="0"><span style="{{ st.style }}">{{ st.char }}</span></sc-for>
+        <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;align-items:center">
+          <div style="min-width:260px">
+            <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);padding:6px 13px;border-radius:30px;font-size:12.5px;font-weight:600;margin-bottom:18px;backdrop-filter:blur(4px)">🎪 Маркетплейс выездных детских мероприятий</div>
+            <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1;letter-spacing:-.025em;margin:0 0 14px">Сцена приедет<br><span style="color:#F5A524">к вам</span></h1>
+            <p style="font-size:16.5px;line-height:1.55;color:rgba(255,255,255,.85);margin:0 0 22px;max-width:520px">Спектакли, шоу, планетарии и мастер-классы для садов и школ. Одна заявка — весь праздник, с договором и безналом.</p>
+            <div style="display:flex;align-items:center;gap:10px;background:#fff;border-radius:15px;padding:7px 7px 7px 16px;max-width:480px;box-shadow:0 12px 30px rgba(0,0,0,.24)">
+              <span style="font-size:17px">🔎</span>
+              <input value="{{ q }}" onInput="{{ onQ }}" placeholder="Спектакль, шоу, планетарий…" style="flex:1;border:0;outline:none;font-family:Manrope;font-size:15px;color:#211A2E;background:none;padding:9px 0;min-width:60px" />
+              <button onClick="{{ scrollGrid }}" style="background:#F5A524;color:#211A2E;border:0;border-radius:11px;padding:12px 20px;font-family:Manrope;font-weight:700;font-size:14px;cursor:pointer;transition:transform .15s" style-hover="transform:translateY(-2px)">Найти</button>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
+              <sc-for list="{{ heroTrust }}" as="t" hint-placeholder-count="4"><span style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.85);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:6px 11px;border-radius:9px">{{ t }}</span></sc-for>
+            </div>
+          </div>
+          <div style="position:relative;height:262px;min-width:220px">
+            <sc-for list="{{ heroPosters }}" as="p" hint-placeholder-count="3">
+              <div style="{{ p.style }}"><sc-if value="{{ p.img }}" hint-placeholder-val="{{ no }}"><img src="{{ p.img }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" /></sc-if><span style="position:absolute;left:8px;bottom:8px;right:8px;font-family:Unbounded;font-weight:700;font-size:12px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.7);line-height:1.1">{{ p.title }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- ad rotation -->
+      <div style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #EAE1D4;border-radius:16px;padding:16px 20px;margin-bottom:20px;overflow:hidden">
+        <span style="font-size:26px;flex-shrink:0">{{ ad.icon }}</span>
+        <div style="flex:1;min-width:0">
+          <div style="font-family:Unbounded;font-weight:700;font-size:15px;animation:fadeIn .5s ease" key="{{ adIdx }}">{{ ad.title }}</div>
+          <div style="font-size:13.5px;color:#6f6878">{{ ad.sub }}</div>
+        </div>
+        <div style="display:flex;gap:5px;flex-shrink:0">
+          <sc-for list="{{ adDots }}" as="d" hint-placeholder-count="3"><span style="{{ d.style }}"></span></sc-for>
+        </div>
+      </div>
+
+      <!-- how it works -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:22px">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:16px;padding:17px 18px;display:flex;gap:13px;align-items:flex-start;animation:floatUp .5s ease both;animation-delay:{{ st.delay }}">
+            <span style="flex-shrink:0;width:36px;height:36px;border-radius:10px;background:{{ st.bg }};color:#fff;font-family:Unbounded;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center">{{ st.n }}</span>
+            <div><div style="font-weight:700;font-size:14.5px;margin-bottom:3px">{{ st.t }}</div><div style="font-size:13px;color:#6f6878;line-height:1.4">{{ st.s }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- category chips -->
+      <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:none">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="5">
+          <button onClick="{{ c.onClick }}" style="{{ c.style }}"><span style="font-size:15px">{{ c.icon }}</span> {{ c.label }}</button>
+        </sc-for>
+      </div>
+
+      <!-- secondary filters -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px;padding:14px 16px;background:#fff;border:1px solid #EAE1D4;border-radius:14px">
+        <label style="font-size:12.5px;color:#6f6878;font-weight:600;display:flex;align-items:center;gap:6px">Возраст
+          <select value="{{ fAge }}" onChange="{{ onAge }}" style="font-family:Manrope;font-size:13px;border:1px solid #EAE1D4;border-radius:9px;padding:7px 9px;background:#FBF7F0;color:#211A2E;cursor:pointer">
+            <option value="all">любой</option><option value="3-5">3–5 лет</option><option value="6-8">6–8 лет</option><option value="9-12">9–12 лет</option>
+          </select>
+        </label>
+        <label style="font-size:12.5px;color:#6f6878;font-weight:600;display:flex;align-items:center;gap:6px">Город
+          <select value="{{ fCity }}" onChange="{{ onCity }}" style="font-family:Manrope;font-size:13px;border:1px solid #EAE1D4;border-radius:9px;padding:7px 9px;background:#FBF7F0;color:#211A2E;cursor:pointer">
+            <option value="all">все</option><option value="Москва">Москва</option><option value="Химки">Химки</option><option value="Мытищи">Мытищи</option><option value="Королёв">Королёв</option>
+          </select>
+        </label>
+        <label style="font-size:12.5px;color:#6f6878;font-weight:600;display:flex;align-items:center;gap:8px;min-width:200px">До {{ priceLabel }}
+          <input type="range" min="11000" max="25000" step="500" value="{{ fPrice }}" onInput="{{ onPrice }}" style="flex:1;accent-color:#6D3B8E;cursor:pointer" />
+        </label>
+        <button onClick="{{ toggleVerified }}" title="{{ verifiedTitle }}" style="{{ verifiedStyle }}">✓ Только проверенные</button>
+        <div style="flex:1"></div>
+        <span id="gridanchor" style="font-family:'JetBrains Mono';font-size:13px;color:#6f6878">{{ resultCount }}</span>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:9px;margin:-12px 2px 20px;font-size:12.5px;color:#6f6878;line-height:1.45">
+        <span style="flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#2E9E6B;color:#fff;font-size:11px;margin-top:1px">✓</span>
+        <span>Значок <b style="color:#2E9E6B">Проверено</b> — платформа проверила юрлицо, договор-оферту, <b>медкнижки артистов</b> (медосмотр по СанПиН) и страховку ответственности. Подробности — в карточке услуги.</span>
+      </div>
+
+      <!-- poster wall -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:18px">
+        <sc-for list="{{ cards }}" as="s" hint-placeholder-count="6">
+          <button onClick="{{ s.onOpen }}" style="text-align:left;border:1px solid #EAE1D4;padding:0;background:#fff;border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;font-family:inherit;box-shadow:0 2px 0 #EAE1D4;animation:floatUp .5s ease both;animation-delay:{{ s.delay }};transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-8px) rotate(-.6deg);box-shadow:{{ s.shadow }}">
+            <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:{{ s.color }}">
+              <sc-if value="{{ s.img }}" hint-placeholder-val="{{ no }}"><img src="{{ s.img }}" loading="lazy" alt="" style="width:100%;height:100%;object-fit:cover;display:block" /></sc-if>
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04) 35%,rgba(0,0,0,.5) 100%)"></div>
+              <div style="position:absolute;top:0;left:0;right:0;height:5px;background:{{ s.color }}"></div>
+              <span style="position:absolute;top:11px;left:11px;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.95);color:{{ s.color }};font-weight:700;font-size:11.5px;padding:5px 9px;border-radius:8px">{{ s.icon }} {{ s.catLabel }}</span>
+              <sc-if value="{{ s.badge }}" hint-placeholder-val="{{ no }}"><span style="{{ s.badgeStyle }}">{{ s.badgeLabel }}</span></sc-if>
+              <sc-if value="{{ s.verified }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;bottom:10px;left:11px;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.96);color:#2E9E6B;font-family:Manrope;font-weight:700;font-size:10.5px;padding:4px 9px;border-radius:20px;box-shadow:0 2px 7px rgba(0,0,0,.22)">✓ Проверено</span></sc-if>
+            </div>
+            <div style="position:relative;height:0">
+              <div style="position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:#FBF7F0;border:1px solid #EAE1D4"></div>
+              <div style="position:absolute;right:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:#FBF7F0;border:1px solid #EAE1D4"></div>
+              <div style="position:absolute;left:11px;right:11px;top:-1px;border-top:2px dotted #E3D9C9"></div>
+            </div>
+            <div style="padding:15px 15px 16px;display:flex;flex-direction:column;gap:6px;flex:1">
+              <div style="display:flex;align-items:center;gap:7px">
+                <span style="font-family:Manrope;color:#F5A524;font-size:13px;letter-spacing:1.5px">{{ s.starsFull }}<span style="color:#E3D6C2">{{ s.starsEmpty }}</span></span>
+                <span style="font-family:'JetBrains Mono';font-size:11px;color:#8a8194;white-space:nowrap">{{ s.rating }} · {{ s.reviews }} отз.</span>
+              </div>
+              <div style="font-family:Unbounded;font-weight:700;font-size:15.5px;line-height:1.18;letter-spacing:-.01em">{{ s.title }}</div>
+              <div style="font-size:12.5px;color:#6f6878">{{ s.org }}</div>
+              <div style="font-family:'JetBrains Mono';font-size:11px;color:#8a8194;margin-top:1px">{{ s.meta }}</div>
+              <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:10px">
+                <div><div style="font-size:10px;color:#a89fae;font-weight:600;line-height:1">от</div><span style="font-family:'JetBrains Mono';font-weight:600;font-size:18px;color:#211A2E">{{ s.price }}</span></div>
+                <span style="font-size:12.5px;font-weight:700;color:#fff;background:#6D3B8E;padding:8px 14px;border-radius:9px">Открыть</span>
+              </div>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ no }}">
+        <div style="text-align:center;padding:60px 20px;color:#8a8194"><div style="font-size:40px;margin-bottom:10px">🎭</div><div style="font-family:Unbounded;font-weight:700;font-size:18px;color:#211A2E">Ничего не нашлось</div><div style="font-size:14px;margin-top:6px">Попробуйте смягчить фильтры</div></div>
+      </sc-if>
+    </section>
+    </sc-if>
+
+    <!-- ============ КАРТОЧКА УСЛУГИ ============ -->
+    <sc-if value="{{ isCard }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:20px">
+      <button onClick="{{ backVitrina }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:10px">← К афише</button>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;align-items:start">
+        <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:{{ svc.color }};box-shadow:0 14px 30px rgba(33,26,46,.16)">
+          <sc-if value="{{ svc.img }}" hint-placeholder-val="{{ no }}"><img src="{{ svc.img }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block" /></sc-if>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.5))"></div>
+          <div style="position:absolute;top:0;left:0;right:0;height:6px;background:{{ svc.color }}"></div>
+          <span style="position:absolute;top:14px;left:14px;background:rgba(255,255,255,.95);color:{{ svc.color }};font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:9px">{{ svc.icon }} {{ svc.catLabel }}</span>
+        </div>
+        <div>
+          <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,34px);line-height:1.05;letter-spacing:-.02em;margin:0 0 8px">{{ svc.title }}</h1>
+          <button onClick="{{ openOrgFromCard }}" style="display:inline-flex;align-items:center;gap:8px;background:none;border:0;cursor:pointer;padding:0;margin-bottom:16px">
+            <span style="font-size:14.5px;color:#6f6878">от <b style="color:#6D3B8E">{{ svc.org }}</b></span>
+            <span style="font-family:'JetBrains Mono';font-size:12px;color:#F5A524">★ {{ svc.rating }} · {{ svc.reviews }} отзывов →</span>
+          </button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+            <sc-for list="{{ svc.facts }}" as="f" hint-placeholder-count="4"><div style="background:#fff;border:1px solid #EAE1D4;border-radius:11px;padding:9px 13px"><div style="font-size:11px;color:#8a8194;font-weight:600">{{ f.k }}</div><div style="font-family:'JetBrains Mono';font-size:14px;font-weight:600;color:#211A2E;margin-top:2px">{{ f.v }}</div></div></sc-for>
+          </div>
+          <div style="background:linear-gradient(135deg,#F0FAF4,#fff);border:1px solid #cdeadd;border-radius:16px;padding:18px 20px;margin-bottom:22px">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:15px"><span style="width:26px;height:26px;border-radius:50%;background:#2E9E6B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">✓</span><span style="font-family:Unbounded;font-weight:700;font-size:15px">Проверено платформой</span></div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px 18px">
+              <sc-for list="{{ svc.checks }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px;flex-shrink:0;line-height:1.3">{{ c.icon }}</span><div><div style="font-weight:700;font-size:13.5px">{{ c.t }}</div><div style="font-size:12px;color:#6f6878;line-height:1.4">{{ c.s }}</div></div></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;background:#211A2E;color:#fff;border-radius:16px;padding:18px 22px">
+            <div style="flex:1"><div style="font-size:12px;color:#a99fb8">Стоимость выезда</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:26px;color:#F5A524">{{ svc.price }}</div></div>
+            <button onClick="{{ gotoBook }}" style="background:#F5A524;color:#211A2E;border:0;border-radius:12px;padding:15px 26px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">Забронировать</button>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:30px">
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:16px;padding:22px">
+          <h3 style="font-family:Unbounded;font-weight:700;font-size:16px;margin:0 0 14px">Что входит</h3>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ svc.includes }}" as="i" hint-placeholder-count="4"><div style="display:flex;gap:10px;font-size:14.5px;line-height:1.4"><span style="color:#2E9E6B;flex-shrink:0">✓</span> {{ i }}</div></sc-for>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:16px;padding:22px">
+          <h3 style="font-family:Unbounded;font-weight:700;font-size:16px;margin:0 0 14px">Условия выезда</h3>
+          <div style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ svc.conditions }}" as="c" hint-placeholder-count="4"><div style="display:flex;gap:10px;font-size:14.5px;line-height:1.4"><span style="flex-shrink:0">📍</span> {{ c }}</div></sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ПРОФИЛЬ ТЕАТРА ============ -->
+    <sc-if value="{{ isOrg }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:20px">
+      <button onClick="{{ backFromOrg }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:10px">← Назад</button>
+      <div style="position:relative;border-radius:20px;overflow:hidden;background:{{ org.color }};color:#fff;padding:34px;margin-bottom:24px">
+        <sc-if value="{{ org.cover }}" hint-placeholder-val="{{ no }}"><img src="{{ org.cover }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32" /></sc-if>
+        <div style="position:relative">
+          <span style="display:inline-block;background:rgba(255,255,255,.92);color:{{ org.color }};font-weight:700;font-size:12px;padding:5px 10px;border-radius:8px;margin-bottom:12px">{{ org.catLabel }}</span>
+          <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(26px,4vw,38px);margin:0 0 10px;letter-spacing:-.02em">{{ org.name }}</h1>
+          <div style="display:flex;gap:18px;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:13.5px;color:rgba(255,255,255,.9)">
+            <span>★ {{ org.rating }} · {{ org.reviews }} отзывов</span><span>📍 {{ org.territory }}</span><span>🎬 {{ org.years }}</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:15.5px;line-height:1.6;color:#3d3548;max-width:760px;margin:0 0 26px">{{ org.desc }}</p>
+
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Документы и допуски</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:30px">
+        <sc-for list="{{ org.docs }}" as="d" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:13px;padding:15px 16px;display:flex;align-items:center;gap:13px">
+            <span style="font-size:22px">{{ d.icon }}</span>
+            <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">{{ d.type }}</div><div style="font-family:'JetBrains Mono';font-size:11px;color:#8a8194;margin-top:2px">{{ d.date }}</div></div>
+            <span style="{{ d.badgeStyle }}">{{ d.badge }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Программы коллектива</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:30px">
+        <sc-for list="{{ org.services }}" as="s" hint-placeholder-count="2">
+          <button onClick="{{ s.onOpen }}" style="text-align:left;border:1px solid #EAE1D4;padding:0;background:#fff;border-radius:14px;overflow:hidden;cursor:pointer;font-family:inherit;display:flex;flex-direction:column" style-hover="border-color:#6D3B8E">
+            <div style="position:relative;aspect-ratio:16/9;background:{{ s.color }}"><sc-if value="{{ s.img }}" hint-placeholder-val="{{ no }}"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover" /></sc-if></div>
+            <div style="padding:12px 14px"><div style="font-family:Unbounded;font-weight:700;font-size:14.5px">{{ s.title }}</div><div style="font-family:'JetBrains Mono';font-size:12px;color:#6D3B8E;margin-top:5px">{{ s.price }}</div></div>
+          </button>
+        </sc-for>
+      </div>
+
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Отзывы садов и школ</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px">
+        <sc-for list="{{ org.reviewList }}" as="r" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:14px;padding:18px 20px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-family:'JetBrains Mono';color:#F5A524;font-size:13px">{{ r.stars }}</span><span style="font-weight:700;font-size:14px">{{ r.garden }}</span><span style="font-size:12px;color:#8a8194">· {{ r.date }}</span></div>
+            <p style="margin:0;font-size:14.5px;line-height:1.55;color:#3d3548">{{ r.text }}</p>
+            <div style="font-size:12.5px;color:#8a8194;margin-top:8px">— {{ r.author }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ БРОНЬ ПО КАЛЕНДАРЮ ============ -->
+    <sc-if value="{{ isBooking }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:20px">
+      <button onClick="{{ backToCard }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:10px">← К услуге</button>
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Бронирование</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">{{ svc.title }} · {{ svc.org }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start">
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><span style="font-family:Unbounded;font-weight:700;font-size:17px">{{ monthLabel }}</span><span style="font-size:12px;color:#8a8194">Выберите дату</span></div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:8px">
+            <sc-for list="{{ weekHeads }}" as="w" hint-placeholder-count="7"><div style="text-align:center;font-family:'JetBrains Mono';font-size:11px;color:#8a8194;padding:4px 0">{{ w }}</div></sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">
+            <sc-for list="{{ calCells }}" as="c" hint-placeholder-count="35"><button onClick="{{ c.onClick }}" disabled="{{ c.disabled }}" style="{{ c.style }}">{{ c.day }}</button></sc-for>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:14px;font-size:11.5px;color:#8a8194;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:3px;background:#fff;border:1px solid #EAE1D4;display:inline-block"></span>свободно</span>
+            <span style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:3px;background:#F1E2E0;display:inline-block"></span>занято</span>
+            <span style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:3px;background:#6D3B8E;display:inline-block"></span>выбрано</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px">
+            <div style="font-family:Unbounded;font-weight:700;font-size:15px;margin-bottom:12px">Время</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ slots }}" as="t" hint-placeholder-count="3"><button onClick="{{ t.onClick }}" disabled="{{ t.disabled }}" style="{{ t.style }}">{{ t.label }}</button></sc-for>
+            </div>
+            <div style="font-family:Unbounded;font-weight:700;font-size:15px;margin:20px 0 12px">Сколько детей</div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <button onClick="{{ kidsDec }}" style="width:42px;height:42px;border:1px solid #EAE1D4;background:#FBF7F0;border-radius:11px;font-size:22px;cursor:pointer;color:#211A2E">−</button>
+              <span style="font-family:'JetBrains Mono';font-weight:600;font-size:24px;min-width:48px;text-align:center">{{ kids }}</span>
+              <button onClick="{{ kidsInc }}" style="width:42px;height:42px;border:1px solid #EAE1D4;background:#FBF7F0;border-radius:11px;font-size:22px;cursor:pointer;color:#211A2E">+</button>
+              <span style="font-size:13px;color:#8a8194">детей в группе</span>
+            </div>
+            <div style="font-family:Unbounded;font-weight:700;font-size:15px;margin:20px 0 12px">Площадка</div>
+            <select value="{{ venue }}" onChange="{{ onVenue }}" style="width:100%;font-family:Manrope;font-size:14px;border:1px solid #EAE1D4;border-radius:10px;padding:12px;background:#FBF7F0;color:#211A2E;cursor:pointer">
+              <option>Музыкальный зал</option><option>Спортивный зал</option><option>Групповая комната</option><option>Уличная площадка</option>
+            </select>
+          </div>
+          <div style="background:#211A2E;color:#fff;border-radius:18px;padding:22px">
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px"><span style="color:#a99fb8">Дата и время</span><span style="font-family:'JetBrains Mono'">{{ bookWhen }}</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px"><span style="color:#a99fb8">Стоимость</span><span style="font-family:'JetBrains Mono'">{{ svc.price }}</span></div>
+            <div style="border-top:1px solid #3a3348;margin:14px 0"></div>
+            <button onClick="{{ sendRequest }}" disabled="{{ bookDisabled }}" style="{{ sendBtnStyle }}">Отправить заявку театру</button>
+            <p style="font-size:11.5px;color:#a99fb8;margin:10px 0 0;text-align:center">Театр подтвердит дату и условия в чате</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ЗАЯВКА + ЧАТ ============ -->
+    <sc-if value="{{ isRequest }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:20px">
+      <button onClick="{{ backFromReq }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:10px">← Назад</button>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+        <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(22px,3.2vw,30px);margin:0;letter-spacing:-.02em">Заявка #{{ reqNum }}</h1>
+        <span style="{{ statusBadgeStyle }}">{{ statusLabel }}</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px">
+        <sc-for list="{{ statusSteps }}" as="st" hint-placeholder-count="4"><div style="{{ st.style }}">{{ st.label }}</div></sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;align-items:start">
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-height:440px">
+          <div style="padding:14px 18px;border-bottom:1px solid #EAE1D4;display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:9px;background:#6D3B8E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px">{{ chatAvatar }}</span><div><div style="font-weight:700;font-size:14px">{{ chatTitle }}</div><div style="font-size:11.5px;color:#8a8194">обычно отвечает за 15 минут</div></div></div>
+          <div style="flex:1;padding:18px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;max-height:380px">
+            <sc-for list="{{ chat }}" as="m" hint-placeholder-count="3">
+              <div style="{{ m.rowStyle }}"><div style="{{ m.bubbleStyle }}">{{ m.text }}<div style="{{ m.timeStyle }}">{{ m.time }}</div></div></div>
+            </sc-for>
+            <sc-if value="{{ typing }}" hint-placeholder-val="{{ no }}">
+              <div style="display:flex;justify-content:flex-start"><div style="background:#F1ECE3;border-radius:15px;border-bottom-left-radius:4px;padding:13px 16px;display:flex;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:#a89fae;animation:typing 1s infinite"></span><span style="width:7px;height:7px;border-radius:50%;background:#a89fae;animation:typing 1s infinite .15s"></span><span style="width:7px;height:7px;border-radius:50%;background:#a89fae;animation:typing 1s infinite .3s"></span></div></div>
+            </sc-if>
+          </div>
+          <div style="padding:12px;border-top:1px solid #EAE1D4;display:flex;gap:8px">
+            <input value="{{ chatInput }}" onInput="{{ onChatType }}" onKeyDown="{{ onChatKey }}" placeholder="Написать сообщение…" style="flex:1;border:1px solid #EAE1D4;border-radius:10px;padding:11px 13px;font-family:Manrope;font-size:14px;outline:none;background:#FBF7F0" />
+            <button onClick="{{ chatSend }}" style="background:#6D3B8E;color:#fff;border:0;border-radius:10px;padding:0 18px;font-family:Manrope;font-weight:700;cursor:pointer">→</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <sc-if value="{{ conflict }}" hint-placeholder-val="{{ no }}"><div style="background:#FBEAE8;border:1px solid #F2685E;border-radius:13px;padding:14px 16px;color:#b53b30;font-size:13.5px;display:flex;gap:9px"><span>⚠️</span> Это время у театра занято. Предложите другой слот в чате.</div></sc-if>
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px">
+            <div style="font-family:Unbounded;font-weight:700;font-size:16px;margin-bottom:16px">Условия мероприятия</div>
+            <div style="display:flex;flex-direction:column;gap:11px;font-size:14px">
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Программа</span><b>{{ cond.service }}</b></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Заказчик</span><b>{{ cond.garden }}</b></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Дата · время</span><b style="font-family:'JetBrains Mono'">{{ cond.when }}</b></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Детей</span><b style="font-family:'JetBrains Mono'">{{ cond.kids }}</b></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Площадка</span><b>{{ cond.venue }}</b></div>
+              <div style="border-top:1px dashed #EAE1D4;margin:6px 0"></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Стоимость</span><b style="font-family:'JetBrains Mono'">{{ cond.price }}</b></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Комиссия платформы · 10%</span><b style="font-family:'JetBrains Mono';color:#6D3B8E">{{ cond.fee }}</b></div>
+            </div>
+            <sc-if value="{{ showActions }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:10px;margin-top:20px">
+              <button onClick="{{ approve }}" style="flex:1;background:#2E9E6B;color:#fff;border:0;border-radius:12px;padding:14px;font-family:Manrope;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 3px 0 #237a51">{{ approveLabel }}</button>
+              <button onClick="{{ editCond }}" style="background:#fff;border:1.5px solid #EAE1D4;color:#211A2E;border-radius:12px;padding:14px 18px;font-family:Manrope;font-weight:600;font-size:15px;cursor:pointer">Изменить</button>
+            </div>
+            </sc-if>
+            <sc-if value="{{ isConfirmed }}" hint-placeholder-val="{{ no }}">
+            <div style="margin-top:20px;background:#E7F4EE;border:1px solid #2E9E6B;border-radius:12px;padding:14px;text-align:center;color:#237a51;font-weight:700;font-size:14.5px">✓ Условия согласованы обеими сторонами</div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ КАБИНЕТ САДА ============ -->
+    <sc-if value="{{ isCabinet }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Кабинет заказчика</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">{{ cabSub }}</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px">
+        <div style="flex:1;min-width:150px;background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Мероприятий</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px">{{ sadCount }}</div></div>
+        <div style="flex:1;min-width:150px;background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Потрачено за год</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px;color:#6D3B8E">{{ sadSpent }}</div></div>
+        <div style="flex:1;min-width:150px;background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Все театры</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px;color:#2E9E6B">с договором</div></div>
+      </div>
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Мои брони</h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ bookings }}" as="b" hint-placeholder-count="2">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:14px;display:flex;gap:14px;align-items:center">
+            <div style="width:64px;height:64px;border-radius:11px;overflow:hidden;flex-shrink:0;background:{{ b.color }}"><sc-if value="{{ b.img }}" hint-placeholder-val="{{ no }}"><img src="{{ b.img }}" alt="" style="width:100%;height:100%;object-fit:cover" /></sc-if></div>
+            <div style="flex:1;min-width:0"><div style="font-family:Unbounded;font-weight:700;font-size:15px">{{ b.title }}</div><div style="font-size:13px;color:#6f6878">{{ b.org }}</div><div style="font-family:'JetBrains Mono';font-size:11.5px;color:#8a8194;margin-top:3px">{{ b.meta }}</div></div>
+            <div style="text-align:right;display:flex;flex-direction:column;gap:7px;align-items:flex-end"><span style="{{ b.statusStyle }}">{{ b.status }}</span><sc-if value="{{ b.canReview }}" hint-placeholder-val="{{ no }}"><button onClick="{{ b.onReview }}" style="background:none;border:0;color:#6D3B8E;font-family:Manrope;font-weight:600;font-size:12.5px;cursor:pointer;padding:0">★ Оставить отзыв</button></sc-if></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ТЕАТР: ГЛАВНАЯ (УСЛУГИ) ============ -->
+    <sc-if value="{{ isTHome }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">{{ tHomeName }}</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Кабинет организатора</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px">
+        <div style="flex:1;min-width:150px;background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Рейтинг</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px;color:#F5A524">★ 4.9</div></div>
+        <div style="flex:1;min-width:150px;background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Активных программ</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px">{{ tActiveCount }}</div></div>
+        <div style="flex:1;min-width:150px;background:#211A2E;color:#fff;border-radius:15px;padding:18px"><div style="font-size:13px;color:#a99fb8">Новые заявки</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px;color:#F5A524">{{ tNewCount }}</div></div>
+      </div>
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Новые заявки от заказчиков</h3>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:30px">
+        <sc-for list="{{ newRequests }}" as="r" hint-placeholder-count="2">
+          <button onClick="{{ r.onOpen }}" style="text-align:left;background:#fff;border:1px solid #EAE1D4;border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:center;cursor:pointer;font-family:inherit" style-hover="border-color:#6D3B8E">
+            <span style="width:42px;height:42px;border-radius:11px;background:#F1E9DC;display:flex;align-items:center;justify-content:center;font-size:19px">🏫</span>
+            <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">{{ r.garden }}</div><div style="font-size:13px;color:#6f6878">{{ r.service }} · {{ r.kids }} детей</div></div>
+            <div style="text-align:right"><div style="font-family:'JetBrains Mono';font-size:13px;font-weight:600">{{ r.when }}</div><div style="font-size:12px;color:#F2685E;font-weight:600">ответить →</div></div>
+          </button>
+        </sc-for>
+      </div>
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:18px;margin:0 0 14px">Мои программы</h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ myServices }}" as="s" hint-placeholder-count="3">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center">
+            <div style="width:58px;height:58px;border-radius:11px;overflow:hidden;flex-shrink:0;background:{{ s.color }}"><sc-if value="{{ s.img }}" hint-placeholder-val="{{ no }}"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover" /></sc-if></div>
+            <div style="flex:1;min-width:0"><div style="font-family:Unbounded;font-weight:700;font-size:14.5px">{{ s.title }}</div><div style="font-family:'JetBrains Mono';font-size:12px;color:#6D3B8E;margin-top:4px">{{ s.price }} · {{ s.bookings }} броней</div></div>
+            <button onClick="{{ s.onToggle }}" style="{{ s.toggleStyle }}">{{ s.toggleLabel }}</button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ТЕАТР: КАЛЕНДАРЬ ============ -->
+    <sc-if value="{{ isTCal }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Календарь занятости</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">{{ monthLabel }} · {{ tBookings.length }} мероприятий</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start">
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px">
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:8px"><sc-for list="{{ weekHeads }}" as="w" hint-placeholder-count="7"><div style="text-align:center;font-family:'JetBrains Mono';font-size:11px;color:#8a8194;padding:4px 0">{{ w }}</div></sc-for></div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px"><sc-for list="{{ tCalCells }}" as="c" hint-placeholder-count="35"><div style="{{ c.style }}">{{ c.day }}<sc-if value="{{ c.booked }}" hint-placeholder-val="{{ no }}"><span style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:#F5A524"></span></sc-if></div></sc-for></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ tBookings }}" as="b" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #EAE1D4;border-radius:13px;padding:14px 16px;display:flex;gap:14px;align-items:center">
+              <div style="text-align:center;flex-shrink:0"><div style="font-family:'JetBrains Mono';font-weight:600;font-size:20px;color:#6D3B8E">{{ b.day }}</div><div style="font-size:10px;color:#8a8194;text-transform:uppercase">июл</div></div>
+              <div style="width:1px;height:34px;background:#EAE1D4"></div>
+              <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">{{ b.garden }}</div><div style="font-size:12.5px;color:#6f6878">{{ b.service }} · {{ b.time }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ТЕАТР: ДОКУМЕНТЫ ============ -->
+    <sc-if value="{{ isUpload }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Документы</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Загрузите допуски — садам важно видеть, что вы проверены</p>
+      <button onClick="{{ onDrop }}" style="width:100%;border:2px dashed #C9B8DC;background:#F7F1FA;border-radius:18px;padding:38px 20px;text-align:center;cursor:pointer;margin-bottom:24px;font-family:inherit;transition:border-color .2s" style-hover="border-color:#6D3B8E">
+        <div style="font-size:38px;margin-bottom:8px">📤</div>
+        <div style="font-family:Unbounded;font-weight:700;font-size:17px;margin-bottom:4px">Перетащите файлы сюда</div>
+        <div style="font-size:13.5px;color:#8a8194">PDF, JPG до 10 МБ · выписка ЕГРЮЛ, договор, медкнижки, страховка</div>
+      </button>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <sc-for list="{{ docs2 }}" as="d" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:13px;padding:15px 17px;display:flex;align-items:center;gap:14px">
+            <span style="font-size:24px">{{ d.icon }}</span>
+            <div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14.5px">{{ d.type }}</div><div style="font-family:'JetBrains Mono';font-size:11.5px;color:#8a8194;margin-top:2px">{{ d.date }}</div></div>
+            <span style="{{ d.badgeStyle }}">{{ d.badge }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ТЕАТР: КОМИССИЯ ============ -->
+    <sc-if value="{{ isTCab }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Комиссия платформы</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Расчёт за {{ monthLabel }} · ставка 10%</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px">
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Проведено меро</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px">{{ com.done }}</div></div>
+        <div style="background:#fff;border:1px solid #EAE1D4;border-radius:15px;padding:18px"><div style="font-size:13px;color:#8a8194">Оборот</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px">{{ com.turnover }}</div></div>
+        <div style="{{ debtCardStyle }}"><div style="font-size:13px;opacity:.8">К оплате · комиссия</div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:28px">{{ com.debt }}</div></div>
+      </div>
+      <sc-if value="{{ debtUnpaid }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#211A2E;color:#fff;border-radius:18px;padding:24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:24px">
+        <div style="flex:1;min-width:200px"><div style="font-family:Unbounded;font-weight:700;font-size:17px;margin-bottom:4px">Оплатить комиссию</div><div style="font-size:13.5px;color:#a99fb8">Безналичный платёж · спишется с привязанной карты •••• 4242</div></div>
+        <button onClick="{{ openPay }}" style="background:#F5A524;color:#211A2E;border:0;border-radius:12px;padding:15px 28px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">💳 Оплатить {{ com.debt }}</button>
+      </div>
+      </sc-if>
+      <sc-if value="{{ paid }}" hint-placeholder-val="{{ no }}">
+      <div style="background:#E7F4EE;border:1px solid #2E9E6B;border-radius:16px;padding:20px;display:flex;align-items:center;gap:14px;margin-bottom:24px"><span style="font-size:30px">✓</span><div><div style="font-family:Unbounded;font-weight:700;font-size:16px;color:#237a51">Комиссия оплачена</div><div style="font-size:13.5px;color:#3d3548">Задолженности нет. Чек отправлен на почту.</div></div></div>
+      </sc-if>
+      <h3 style="font-family:Unbounded;font-weight:700;font-size:17px;margin:0 0 12px">История платежей</h3>
+      <div style="background:#fff;border:1px solid #EAE1D4;border-radius:15px;overflow:hidden">
+        <sc-for list="{{ payHistory }}" as="p" hint-placeholder-count="3">
+          <div style="padding:15px 18px;border-bottom:1px solid #F1ECE3;display:flex;align-items:center;gap:12px"><span style="font-size:18px">🧾</span><div style="flex:1"><div style="font-weight:600;font-size:14px">{{ p.label }}</div><div style="font-family:'JetBrains Mono';font-size:11.5px;color:#8a8194">{{ p.id }}</div></div><div style="font-family:'JetBrains Mono';font-weight:600;font-size:15px">{{ p.amount }}</div><span style="font-size:11.5px;color:#2E9E6B;font-weight:600">оплачено</span></div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <!-- ============ ВХОД / РЕГИСТРАЦИЯ ============ -->
+    <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:34px;max-width:440px;margin:0 auto;width:100%">
+      <div style="text-align:center;margin-bottom:22px">
+        <div style="font-family:Unbounded;font-weight:800;font-size:26px;letter-spacing:-.02em">{{ authTitle }}</div>
+        <div style="color:#6f6878;font-size:14.5px;margin-top:6px">{{ authSub }}</div>
+      </div>
+      <div style="display:flex;width:100%;background:#F1E9DC;border-radius:13px;padding:4px;gap:3px;margin-bottom:18px">
+        <button onClick="{{ tabReg }}" style="{{ tabRegStyle }}">Регистрация</button>
+        <button onClick="{{ tabLogin }}" style="{{ tabLoginStyle }}">Вход</button>
+      </div>
+      <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px">
+        <sc-if value="{{ isReg }}" hint-placeholder-val="{{ true }}">
+        <label style="{{ labStyle }}">Как вас зовут
+          <input value="{{ afName }}" onInput="{{ onAfName }}" placeholder="Имя и фамилия" style="{{ inputStyle }}" />
+        </label>
+        </sc-if>
+        <label style="{{ labStyle }}">Почта
+          <input value="{{ afEmail }}" onInput="{{ onAfEmail }}" type="email" placeholder="you@example.ru" style="{{ inputStyle }}" />
+        </label>
+        <label style="{{ labStyle }}">Пароль
+          <input value="{{ afPass }}" onInput="{{ onAfPass }}" type="password" placeholder="Минимум 4 символа" style="{{ inputStyle }}" />
+        </label>
+        <button onClick="{{ doAuth }}" style="margin-top:4px;width:100%;background:#F5A524;color:#211A2E;border:0;border-radius:12px;padding:15px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">{{ authBtn }}</button>
+        <p style="text-align:center;font-size:11.5px;color:#8a8194;margin:2px 0 0">🔒 Демо: профиль хранится только в этом браузере</p>
+      </div>
+      <button onClick="{{ goVitrinaPlain }}" style="display:block;margin:18px auto 0;background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:13.5px;cursor:pointer">Сначала посмотреть афишу →</button>
+    </section>
+    </sc-if>
+
+    <!-- ============ ОНБОРДИНГ ============ -->
+    <sc-if value="{{ isOnboard }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:slideUp .35s ease;padding-top:28px;max-width:680px;margin:0 auto;width:100%">
+      <sc-if value="{{ obChoose }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-family:Unbounded;font-weight:800;font-size:25px;letter-spacing:-.02em">Кто вы на платформе?</div>
+        <div style="color:#6f6878;font-size:14.5px;margin-top:6px">Выберите роль, настроим кабинет под вас</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+        <button onClick="{{ pickOrg }}" style="text-align:left;background:#fff;border:1.5px solid #EAE1D4;border-radius:18px;padding:24px;cursor:pointer;font-family:inherit;transition:border-color .2s" style-hover="border-color:#6D3B8E">
+          <div style="font-size:34px;margin-bottom:10px">🎭</div>
+          <div style="font-family:Unbounded;font-weight:700;font-size:18px;margin-bottom:6px">Я организатор</div>
+          <div style="font-size:13.5px;color:#6f6878;line-height:1.45">Театр, шоу, студия или планетарий. Размещаю программы и получаю заявки от садов, школ и лагерей.</div>
+        </button>
+        <button onClick="{{ pickClient }}" style="text-align:left;background:#fff;border:1.5px solid #EAE1D4;border-radius:18px;padding:24px;cursor:pointer;font-family:inherit;transition:border-color .2s" style-hover="border-color:#6D3B8E">
+          <div style="font-size:34px;margin-bottom:10px">🏫</div>
+          <div style="font-family:Unbounded;font-weight:700;font-size:18px;margin-bottom:6px">Я заказчик</div>
+          <div style="font-size:13.5px;color:#6f6878;line-height:1.45">Детский сад, школа, лагерь или центр. Ищу проверенные программы и бронирую выезд к нам.</div>
+        </button>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ obOrg }}" hint-placeholder-val="{{ no }}">
+      <button onClick="{{ obBack }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:6px">← Назад</button>
+      <div style="font-family:Unbounded;font-weight:800;font-size:23px;letter-spacing:-.02em;margin-bottom:4px">Профиль организатора</div>
+      <p style="color:#6f6878;font-size:14px;margin:0 0 18px">Заполните карточку, садам важно видеть, кто к ним приедет</p>
+      <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:15px">
+        <label style="cursor:pointer">
+          <div style="position:relative;height:130px;border-radius:13px;border:1.5px dashed #C9B8DC;background:#F7F1FA;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px">
+            <sc-if value="{{ obHasCover }}" hint-placeholder-val="{{ no }}"><img src="{{ obCoverData }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" /></sc-if>
+            <span style="position:relative;z-index:1;color:#6D3B8E;font-weight:600;font-size:14px;background:rgba(255,255,255,.85);padding:7px 13px;border-radius:9px">📷 Фото-обложка</span>
+          </div>
+          <input type="file" accept="image/*" onChange="{{ onOrgCover }}" style="display:none" />
+        </label>
+        <label style="{{ labStyle }}">Название коллектива
+          <input value="{{ obOrgName }}" onInput="{{ onOrgName }}" placeholder="Театр «Балаганчик»" style="{{ inputStyle }}" />
+        </label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <label style="{{ labStyle }};flex:1;min-width:140px">Направление
+            <select value="{{ obOrgCat }}" onChange="{{ onOrgCat }}" style="{{ selStyle }}">
+              <option value="theatre">Театр</option><option value="show">Шоу</option><option value="science">Наука</option><option value="master">Мастер-класс</option>
+            </select>
+          </label>
+          <label style="{{ labStyle }};flex:1;min-width:140px">Город
+            <input value="{{ obOrgCity }}" onInput="{{ onOrgCity }}" placeholder="Москва" style="{{ inputStyle }}" />
+          </label>
+        </div>
+        <label style="{{ labStyle }}">Территория выезда
+          <input value="{{ obOrgTerr }}" onInput="{{ onOrgTerr }}" placeholder="Москва и область до 60 км" style="{{ inputStyle }}" />
+        </label>
+        <label style="{{ labStyle }}">Описание
+          <textarea value="{{ obOrgDesc }}" onInput="{{ onOrgDesc }}" placeholder="Чем хороши, что привозите, как работаете" style="{{ areaStyle }}"></textarea>
+        </label>
+        <div style="border-top:1px dashed #EAE1D4;margin:2px 0"></div>
+        <div style="font-family:Unbounded;font-weight:700;font-size:15px">Первая программа</div>
+        <label style="{{ labStyle }}">Название программы
+          <input value="{{ obProgTitle }}" onInput="{{ onProgTitle }}" placeholder="Кот в сапогах" style="{{ inputStyle }}" />
+        </label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <label style="{{ labStyle }};flex:1;min-width:120px">Возраст
+            <select value="{{ obProgAge }}" onChange="{{ onProgAge }}" style="{{ selStyle }}">
+              <option value="3-7">3-7 лет</option><option value="5-10">5-10 лет</option><option value="6-12">6-12 лет</option>
+            </select>
+          </label>
+          <label style="{{ labStyle }};flex:1;min-width:120px">Цена выезда, ₽
+            <input value="{{ obProgPrice }}" onInput="{{ onProgPrice }}" type="number" placeholder="15000" style="{{ inputStyle }}" />
+          </label>
+        </div>
+        <label style="cursor:pointer">
+          <div style="position:relative;height:120px;border-radius:13px;border:1.5px dashed #C9B8DC;background:#F7F1FA;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px">
+            <sc-if value="{{ obHasProgCover }}" hint-placeholder-val="{{ no }}"><img src="{{ obProgData }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" /></sc-if>
+            <span style="position:relative;z-index:1;color:#6D3B8E;font-weight:600;font-size:14px;background:rgba(255,255,255,.85);padding:7px 13px;border-radius:9px">📷 Афиша программы</span>
+          </div>
+          <input type="file" accept="image/*" onChange="{{ onProgCover }}" style="display:none" />
+        </label>
+        <button onClick="{{ saveOrg }}" style="margin-top:4px;width:100%;background:#F5A524;color:#211A2E;border:0;border-radius:12px;padding:15px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">Опубликовать в афише</button>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ obClient }}" hint-placeholder-val="{{ no }}">
+      <button onClick="{{ obBack }}" style="background:none;border:0;color:#6f6878;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0;margin-bottom:6px">← Назад</button>
+      <div style="font-family:Unbounded;font-weight:800;font-size:23px;letter-spacing:-.02em;margin-bottom:4px">Профиль заказчика</div>
+      <p style="color:#6f6878;font-size:14px;margin:0 0 18px">Театры найдут вас по адресу и фото. Укажите, куда приезжать.</p>
+      <div style="background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:15px">
+        <label style="cursor:pointer">
+          <div style="position:relative;height:130px;border-radius:13px;border:1.5px dashed #C9B8DC;background:#F7F1FA;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px">
+            <sc-if value="{{ obHasInstPhoto }}" hint-placeholder-val="{{ no }}"><img src="{{ obInstData }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" /></sc-if>
+            <span style="position:relative;z-index:1;color:#6D3B8E;font-weight:600;font-size:14px;background:rgba(255,255,255,.85);padding:7px 13px;border-radius:9px">📷 Фото учреждения</span>
+          </div>
+          <input type="file" accept="image/*" onChange="{{ onInstPhoto }}" style="display:none" />
+        </label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <label style="{{ labStyle }};flex:1;min-width:150px">Тип учреждения
+            <select value="{{ obInstType }}" onChange="{{ onInstType }}" style="{{ selStyle }}">
+              <option>Детский сад</option><option>Школа</option><option>Лагерь</option><option>Центр развития</option>
+            </select>
+          </label>
+          <label style="{{ labStyle }};flex:1;min-width:150px">Город
+            <input value="{{ obInstCity }}" onInput="{{ onInstCity }}" placeholder="Москва" style="{{ inputStyle }}" />
+          </label>
+        </div>
+        <label style="{{ labStyle }}">Название
+          <input value="{{ obInstName }}" onInput="{{ onInstName }}" placeholder="Детский сад №34" style="{{ inputStyle }}" />
+        </label>
+        <label style="{{ labStyle }}">Адрес
+          <input value="{{ obInstAddr }}" onInput="{{ onInstAddr }}" placeholder="ул. Ленина, 12" style="{{ inputStyle }}" />
+        </label>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <label style="{{ labStyle }};flex:1;min-width:150px">Контактное лицо
+            <input value="{{ obInstContact }}" onInput="{{ onInstContact }}" placeholder="Имя, телефон" style="{{ inputStyle }}" />
+          </label>
+          <label style="{{ labStyle }};flex:1;min-width:150px">Сколько детей
+            <input value="{{ obInstKids }}" onInput="{{ onInstKids }}" type="number" placeholder="120" style="{{ inputStyle }}" />
+          </label>
+        </div>
+        <button onClick="{{ saveClient }}" style="margin-top:4px;width:100%;background:#F5A524;color:#211A2E;border:0;border-radius:12px;padding:15px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">Сохранить и найти программы</button>
+      </div>
+      </sc-if>
+    </section>
+    </sc-if>
+
+    <!-- ============ ПРОФИЛЬ ============ -->
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:26px;max-width:680px;margin:0 auto;width:100%">
+      <div style="display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #EAE1D4;border-radius:18px;padding:22px;margin-bottom:18px">
+        <div style="width:64px;height:64px;border-radius:15px;overflow:hidden;background:#6D3B8E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">
+          <sc-if value="{{ profHasPhoto }}" hint-placeholder-val="{{ no }}"><img src="{{ profPhoto }}" alt="" style="width:100%;height:100%;object-fit:cover" /></sc-if>
+          <sc-if value="{{ profNoPhoto }}" hint-placeholder-val="{{ true }}">{{ accIcon }}</sc-if>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-family:Unbounded;font-weight:800;font-size:20px;line-height:1.15">{{ profName }}</div>
+          <div style="font-size:13.5px;color:#6f6878;margin-top:3px">{{ profSub }}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <sc-for list="{{ profActions }}" as="a" hint-placeholder-count="4">
+          <button onClick="{{ a.onClick }}" style="{{ profActStyle }}" style-hover="border-color:#6D3B8E"><span style="font-size:18px;margin-right:7px">{{ a.icon }}</span>{{ a.label }}</button>
+        </sc-for>
+      </div>
+      <button onClick="{{ logout }}" style="display:block;margin:22px auto 0;background:#fff;border:1px solid #EAE1D4;color:#b53b30;border-radius:12px;padding:12px 22px;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer">Выйти из аккаунта</button>
+    </section>
+    </sc-if>
+
+    <!-- ============ ЗАКАЗЧИКИ (для организаторов) ============ -->
+    <sc-if value="{{ isClients }}" hint-placeholder-val="{{ no }}">
+    <section style="animation:fadeIn .35s ease;padding-top:24px">
+      <h1 style="font-family:Unbounded;font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.02em">Заказчики</h1>
+      <p style="color:#6f6878;font-size:15px;margin:0 0 22px">Сады, школы и лагеря, которым нужны программы. Нажмите, чтобы предложить выезд.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px">
+        <sc-for list="{{ clientsList }}" as="c" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #EAE1D4;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 0 #EAE1D4">
+            <div style="position:relative;aspect-ratio:16/9;background:{{ c.typeColor }};display:flex;align-items:center;justify-content:center">
+              <sc-if value="{{ c.hasPhoto }}" hint-placeholder-val="{{ no }}"><img src="{{ c.photo }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" /></sc-if>
+              <sc-if value="{{ c.noPhoto }}" hint-placeholder-val="{{ true }}"><span style="font-size:42px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))">{{ c.icon }}</span></sc-if>
+              <span style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,.95);color:{{ c.typeColor }};font-weight:700;font-size:11.5px;padding:5px 9px;border-radius:8px">{{ c.icon }} {{ c.type }}</span>
+              <sc-if value="{{ c.mine }}" hint-placeholder-val="{{ no }}"><span style="position:absolute;top:10px;right:10px;background:#211A2E;color:#fff;font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:7px">это вы</span></sc-if>
+            </div>
+            <div style="padding:15px;display:flex;flex-direction:column;gap:6px;flex:1">
+              <div style="font-family:Unbounded;font-weight:700;font-size:15.5px;line-height:1.18">{{ c.name }}</div>
+              <div style="font-size:13px;color:#6f6878;display:flex;gap:6px"><span>📍</span> {{ c.addr }}, {{ c.city }}</div>
+              <div style="font-family:'JetBrains Mono';font-size:11.5px;color:#8a8194">👶 {{ c.kids }} детей</div>
+              <button onClick="{{ c.onSuggest }}" style="margin-top:auto;background:#6D3B8E;color:#fff;border:0;border-radius:10px;padding:10px;font-family:Manrope;font-weight:700;font-size:13.5px;cursor:pointer">Предложить выезд</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+  </main>
+
+  <!-- ===== TOAST ===== -->
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ no }}">
+    <div style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90;background:#211A2E;color:#fff;padding:14px 22px;border-radius:13px;font-weight:600;font-size:14.5px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:pop .25s ease">{{ toast }}</div>
+  </sc-if>
+
+  <!-- ===== PAY MODAL ===== -->
+  <sc-if value="{{ payOpen }}" hint-placeholder-val="{{ no }}">
+    <div onClick="{{ closePay }}" style="position:fixed;inset:0;z-index:100;background:rgba(33,26,46,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s ease">
+      <div onClick="{{ stop }}" style="background:#fff;border-radius:22px;width:100%;max-width:420px;overflow:hidden;animation:pop .28s ease;box-shadow:0 30px 70px rgba(0,0,0,.3)">
+        <sc-if value="{{ payForm }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:26px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><div style="font-family:Unbounded;font-weight:700;font-size:19px">Оплата комиссии</div><button onClick="{{ closePay }}" style="background:none;border:0;font-size:22px;cursor:pointer;color:#8a8194">×</button></div>
+          <div style="background:linear-gradient(135deg,#6D3B8E,#552c72);border-radius:15px;padding:20px;color:#fff;margin-bottom:20px">
+            <div style="display:flex;justify-content:space-between;align-items:start"><span style="font-size:13px;color:rgba(255,255,255,.8)">Карта организатора</span><span style="font-size:20px">💳</span></div>
+            <div style="font-family:'JetBrains Mono';font-size:19px;letter-spacing:.12em;margin:18px 0 6px">•••• •••• •••• 4242</div>
+            <div style="font-family:'JetBrains Mono';font-size:12px;color:rgba(255,255,255,.75)">Театр «Балаганчик» · 07/29</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:15px;margin-bottom:6px"><span style="color:#6f6878">Комиссия за {{ monthLabel }}</span><b style="font-family:'JetBrains Mono'">{{ com.debt }}</b></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:20px;color:#8a8194"><span>Эквайринг</span><span>0 ₽</span></div>
+          <button onClick="{{ doPay }}" style="width:100%;background:#F5A524;color:#211A2E;border:0;border-radius:13px;padding:16px;font-family:Manrope;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 3px 0 #c8821a">Оплатить {{ com.debt }}</button>
+          <p style="text-align:center;font-size:11.5px;color:#8a8194;margin:12px 0 0">🔒 Демо-оплата · реальные деньги не списываются</p>
+        </div>
+        </sc-if>
+        <sc-if value="{{ payProcessing }}" hint-placeholder-val="{{ no }}">
+        <div style="padding:60px 26px;text-align:center"><div style="width:46px;height:46px;border:4px solid #EAE1D4;border-top-color:#6D3B8E;border-radius:50%;margin:0 auto 20px;animation:spin .8s linear infinite"></div><div style="font-family:Unbounded;font-weight:700;font-size:17px">Проводим платёж…</div><div style="font-size:13.5px;color:#8a8194;margin-top:6px">Связь с банком</div></div>
+        </sc-if>
+        <sc-if value="{{ payDone }}" hint-placeholder-val="{{ no }}">
+        <div style="padding:34px 26px;text-align:center">
+          <div style="width:62px;height:62px;background:#E7F4EE;color:#2E9E6B;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px;animation:pop .4s ease">✓</div>
+          <div style="font-family:Unbounded;font-weight:800;font-size:22px">Оплачено</div>
+          <div style="font-size:14px;color:#6f6878;margin:6px 0 22px">Комиссия за {{ monthLabel }} погашена</div>
+          <div style="background:#FBF7F0;border:1px dashed #EAE1D4;border-radius:13px;padding:18px;text-align:left;font-family:'JetBrains Mono';font-size:13px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="color:#8a8194">Чек</span><span>{{ receipt.id }}</span></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="color:#8a8194">Дата</span><span>{{ receipt.date }}</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:#8a8194">Сумма</span><b>{{ com.debt }}</b></div>
+          </div>
+          <button onClick="{{ closePay }}" style="width:100%;background:#211A2E;color:#fff;border:0;border-radius:13px;padding:15px;font-family:Manrope;font-weight:700;font-size:15px;cursor:pointer;margin-top:18px">Готово</button>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.cats = {
+      theatre:{label:'Театр', color:'#6D3B8E', icon:'🎭'},
+      show:{label:'Шоу', color:'#F2685E', icon:'🎪'},
+      science:{label:'Наука', color:'#14A89A', icon:'🔭'},
+      master:{label:'Мастер-класс', color:'#F5A524', icon:'🎨'},
+    };
+    const inc = ['Выезд команды, реквизит и оборудование','Декорации, костюмы и грим','Музыкальное и световое сопровождение','Ведущий-аниматор и фото на память'];
+    const con = ['Площадка от 4×3 м (зал или группа)','Розетка 220В рядом со сценой','30 минут на монтаж до начала','Возможность затемнить помещение'];
+    this._inc=inc; this._con=con;
+    this.services = [
+      {id:'s1',title:'Кот в сапогах',org:'Театр «Балаганчик»',orgId:'t1',cat:'theatre',a1:3,a2:7,price:18000,dur:45,city:'Москва',rating:'4.9',reviews:124,verified:true,img:'1503095396549-807759245b35',desc:'Музыкальный спектакль по мотивам сказки Шарля Перро. Живые декорации, яркие костюмы и интерактив с залом — дети помогают Коту перехитрить Людоеда.',includes:inc,conditions:con},
+      {id:'s2',title:'Снежная королева',org:'Театр «Балаганчик»',orgId:'t1',cat:'theatre',a1:5,a2:10,price:22000,dur:50,city:'Москва',rating:'4.8',reviews:89,verified:true,img:'1485846234645-a62644f84728',desc:'Новогодний спектакль с эффектом снега, проекциями и хороводом у ёлки. Идеален для утренников и зимних праздников.',includes:inc,conditions:con},
+      {id:'s11',title:'Теневой театр «Сказки народов»',org:'Студия «Лучик»',orgId:'t5',cat:'theatre',a1:4,a2:9,price:15000,dur:40,city:'Королёв',rating:'4.7',reviews:38,verified:true,img:'1517457373958-b7bdd4587205',desc:'Камерный теневой театр: силуэты оживают на большом экране под живое озвучивание. Завораживает даже самых непосед.',includes:inc,conditions:con},
+      {id:'s5',title:'Шоу мыльных пузырей',org:'Артель «Фейерверк»',orgId:'t2',cat:'show',a1:3,a2:8,price:14000,dur:40,city:'Москва',rating:'4.8',reviews:203,verified:true,img:'1514525253161-7a46d19cd819',desc:'Гигантские пузыри, дым-машина и ребёнок внутри пузыря. Восторг и тысячи фотографий гарантированы.',includes:inc,conditions:con},
+      {id:'s6',title:'Научное шоу «Взрыв»',org:'Артель «Фейерверк»',orgId:'t2',cat:'show',a1:6,a2:12,price:16000,dur:45,city:'Химки',rating:'4.9',reviews:97,verified:true,img:'1533174072545-7a4b6ad7a6c3',desc:'Безопасные, но зрелищные опыты: сухой лёд, химические вулканы и молнии Теслы. Наука как праздник.',includes:inc,conditions:con},
+      {id:'s7',title:'Цирковое шоу «Алле-оп»',org:'Артель «Фейерверк»',orgId:'t2',cat:'show',a1:4,a2:10,price:20000,dur:50,city:'Москва',rating:'4.6',reviews:51,verified:false,img:'1470229722913-7c0e2dbbafd3',desc:'Жонглёры, фокусник и дрессированные питомцы. Классический цирк, который приезжает прямо к вам во двор.',includes:inc,conditions:con},
+      {id:'s3',title:'Мобильный планетарий',org:'«Космо-Тур»',orgId:'t3',cat:'science',a1:5,a2:12,price:17000,dur:45,city:'Москва',rating:'4.9',reviews:156,verified:true,img:'1444703686981-a3abbc4d4fe3',desc:'Надувной купол на 25 детей с полнокупольным фильмом о космосе. Звёздное небо прямо в музыкальном зале.',includes:inc,conditions:con},
+      {id:'s4',title:'Лаборатория чудес',org:'«Космо-Тур»',orgId:'t3',cat:'science',a1:7,a2:12,price:16500,dur:50,city:'Москва',rating:'4.7',reviews:64,verified:true,img:'1530021232320-687d8e3dba54',desc:'Дети сами ставят опыты: выращивают кристаллы, делают слаймы и запускают мини-ракеты. Всё по СанПиН.',includes:inc,conditions:con},
+      {id:'s8',title:'Гончарная мастерская',org:'Студия «Глина»',orgId:'t4',cat:'master',a1:5,a2:12,price:13000,dur:60,city:'Москва',rating:'4.9',reviews:78,verified:true,img:'1471478331149-c72f17e33c73',desc:'Настоящий гончарный круг и роспись своей кружки. Каждый ребёнок уезжает с собственным изделием.',includes:inc,conditions:con},
+      {id:'s9',title:'Кулинарный мастер-класс',org:'Студия «Глина»',orgId:'t4',cat:'master',a1:4,a2:10,price:12000,dur:60,city:'Мытищи',rating:'4.7',reviews:42,verified:true,img:'1472162072942-cd5147eb3902',desc:'Готовим и украшаем пряники и пиццу. Колпачки, фартучки и все продукты привозим с собой.',includes:inc,conditions:con},
+      {id:'s10',title:'Анимация и роспись лиц',org:'Студия «Глина»',orgId:'t4',cat:'master',a1:3,a2:8,price:11000,dur:50,city:'Москва',rating:'4.8',reviews:110,verified:true,img:'1518611012118-696072aa579a',desc:'Аквагрим, твистинг из шаров и весёлые конкурсы. Идеально как дополнение к любому празднику.',includes:inc,conditions:con},
+      {id:'s12',title:'Космо-квест «Млечный путь»',org:'«Космо-Тур»',orgId:'t3',cat:'science',a1:8,a2:12,price:18500,dur:60,city:'Москва',rating:'4.8',reviews:29,verified:false,img:'1559827260-dc66d52bef19',desc:'Командная игра-квест по станциям с заданиями про планеты и созвездия. Развивает логику и работу в команде.',includes:inc,conditions:con},
+    ];
+    const okDoc=(t,d)=>({type:t,date:d,status:'ok'});
+    this.orgs = {
+      t1:{name:'Театр «Балаганчик»',cat:'theatre',rating:'4.9',reviews:124,territory:'Москва и область до 60 км',years:'на платформе с 2012',cover:'1507924538820-ede94a04019d',
+        desc:'Профессиональный детский театр. Выездные спектакли с полным комплектом декораций, костюмов и звука. Все артисты с медкнижками, работаем по договору и принимаем безналичную оплату от учреждений.',
+        docs:[okDoc('Выписка ЕГРЮЛ','12.01.2026'),okDoc('Договор оферты','03.02.2026'),okDoc('Медкнижки артистов','20.11.2025'),{type:'Программа по СанПиН',date:'на модерации',status:'mod'}],
+        reviewList:[
+          {garden:'Детский сад №34, Москва',author:'Марина В., воспитатель',rating:5,text:'Дети были в восторге! Артисты приехали вовремя, всё своё — декорации, костюмы, звук. Закрыли все документы для заведующей.',date:'июнь 2026'},
+          {garden:'Школа №1287',author:'Ольга К., завуч',rating:5,text:'Спектакль на Новый год организован идеально. Договор, безнал, чек — бухгалтерия довольна. Будем заказывать ещё.',date:'январь 2026'},
+          {garden:'Сад «Радуга», Химки',author:'Елена П.',rating:4,text:'Отличная программа, дети довольны. Немного задержались на въезде, но предупредили заранее.',date:'май 2026'},
+        ]},
+      t2:{name:'Артель «Фейерверк»',cat:'show',rating:'4.8',reviews:351,territory:'Москва, Химки, Мытищи',years:'на платформе с 2015',cover:'1533174072545-7a4b6ad7a6c3',
+        desc:'Команда шоуменов и научных аниматоров. Делаем яркие интерактивные программы для праздников любого масштаба — от группы до актового зала.',
+        docs:[okDoc('Выписка ЕГРИП','08.02.2026'),okDoc('Договор оферты','08.02.2026'),okDoc('Сертификаты безопасности','14.12.2025')],
+        reviewList:[
+          {garden:'Сад №51, Москва',author:'Анна Т.',rating:5,text:'Шоу пузырей — это что-то невероятное. Заказывали на выпускной, дети визжали от счастья.',date:'июнь 2026'},
+          {garden:'Лицей №2, Химки',author:'Дмитрий Р.',rating:5,text:'Научное шоу «Взрыв» прошло на ура. Безопасно, зрелищно, познавательно.',date:'апрель 2026'},
+        ]},
+      t3:{name:'«Космо-Тур»',cat:'science',rating:'4.9',reviews:249,territory:'Москва и ближнее Подмосковье',years:'на платформе с 2018',cover:'1444703686981-a3abbc4d4fe3',
+        desc:'Мобильный планетарий и научные программы о космосе. Привозим надувной купол, проектор и образовательные фильмы прямо в учреждение.',
+        docs:[okDoc('Выписка ЕГРЮЛ','19.01.2026'),okDoc('Договор оферты','19.01.2026'),okDoc('Пожарная декларация купола','02.03.2026'),okDoc('Медкнижки','11.11.2025')],
+        reviewList:[
+          {garden:'Гимназия №7, Москва',author:'Наталья С.',rating:5,text:'Планетарий поместился в музыкальном зале, дети в полном восторге от звёздного неба. Очень рекомендую.',date:'май 2026'},
+          {garden:'Сад «Сказка»',author:'Ирина М.',rating:5,text:'Аккуратно, профессионально, по договору. Закрыли все бумаги в тот же день.',date:'март 2026'},
+        ]},
+      t4:{name:'Студия «Глина»',cat:'master',rating:'4.8',reviews:230,territory:'Москва, Мытищи',years:'на платформе с 2019',cover:'1471478331149-c72f17e33c73',
+        desc:'Творческие выездные мастер-классы: гончарство, кулинария, аквагрим. Все материалы привозим с собой, каждый ребёнок забирает результат.',
+        docs:[okDoc('Выписка ЕГРИП','22.02.2026'),okDoc('Договор оферты','22.02.2026'),okDoc('Сертификаты на материалы','05.01.2026')],
+        reviewList:[
+          {garden:'Сад №34, Москва',author:'Марина В.',rating:5,text:'Гончарный круг привёл детей в восторг. Чисто, организованно, все увезли свои кружки.',date:'июнь 2026'},
+        ]},
+      t5:{name:'Студия «Лучик»',cat:'theatre',rating:'4.7',reviews:38,territory:'Королёв, Мытищи',years:'на платформе с 2021',cover:'1517457373958-b7bdd4587205',
+        desc:'Камерный теневой и кукольный театр. Тихие, атмосферные спектакли для самых маленьких зрителей.',
+        docs:[okDoc('Выписка ЕГРИП','17.01.2026'),okDoc('Договор оферты','17.01.2026'),{type:'Медкнижки',date:'на модерации',status:'mod'}],
+        reviewList:[
+          {garden:'Сад «Колокольчик», Королёв',author:'Светлана Д.',rating:5,text:'Теневой театр — необычно и красиво. Малыши сидели тихо весь спектакль, что само по себе чудо.',date:'апрель 2026'},
+        ]},
+    };
+    this.ads = [
+      {icon:'🏫',title:'Для садов: одна заявка — весь праздник',sub:'Выбрали, забронировали, оплатили по безналу. Без обзвона и поиска.'},
+      {icon:'🎭',title:'Для театров: брони без поиска клиентов',sub:'Сады находят вас сами. Вы только подтверждаете дату в чате.'},
+      {icon:'🤝',title:'Прозрачная комиссия — всего 10%',sub:'Платформа берёт процент только с проведённых мероприятий.'},
+    ];
+    this.state = {
+      role:'sad', route:'vitrina', q:'', fCat:'all', fAge:'all', fCity:'all',
+      fVerified:false, fPrice:25000, serviceId:'s1', orgId:'t1', fromOrg:false,
+      book:{date:null,time:null,kids:25,venue:'Музыкальный зал'},
+      reqStatus:'draft', chat:[], chatInput:'', activeReq:null,
+      bookings:[
+        {title:'Шоу мыльных пузырей',org:'Артель «Фейерверк»',cat:'show',date:'12 июня',time:'11:00',kids:28,price:14000,status:'Проведена'},
+        {title:'Мобильный планетарий',org:'«Космо-Тур»',cat:'science',date:'3 июля',time:'10:00',kids:24,price:17000,status:'Подтверждена'},
+      ],
+      adIdx:0, paid:false, payOpen:false, payStep:'form', paused:{}, toast:null, typing:false,
+      docs2:[
+        {type:'Выписка ЕГРЮЛ',date:'12.01.2026',status:'ok'},
+        {type:'Договор оферты',date:'03.02.2026',status:'ok'},
+        {type:'Медкнижки артистов',date:'20.11.2025',status:'ok'},
+        {type:'Программа по СанПиН',date:'на модерации',status:'mod'},
+      ],
+      account:this.loadAccount(),
+      authTab:'register', af:{name:'',email:'',pass:''},
+      obStep:'choose',
+      ob:{orgName:'',orgCat:'theatre',orgCity:'Москва',orgTerr:'',orgDesc:'',orgCover:null,
+          progTitle:'',progAge:'3-7',progPrice:'',progCover:null,
+          instType:'Детский сад',instName:'',instCity:'Москва',instAddr:'',instPhoto:null,instContact:'',instKids:''},
+    };
+    if(this.state.account){ this.state.role = this.state.account.type==='org' ? 'teatr' : 'sad'; }
+  }
+  componentDidMount(){
+    const h=location.hash.slice(1);
+    if(h) this.setState({route:h});
+    this._onHash=()=>this.setState({route:location.hash.slice(1)||'vitrina'});
+    window.addEventListener('hashchange',this._onHash);
+    this._ad=setInterval(()=>this.setState(s=>({adIdx:(s.adIdx+1)%3})),3800);
+  }
+  componentWillUnmount(){ window.removeEventListener('hashchange',this._onHash); clearInterval(this._ad); clearTimeout(this._t); }
+  go(r){ if(location.hash.slice(1)===r) this.setState({route:r}); else location.hash=r; }
+  toast(t){ this.setState({toast:t}); clearTimeout(this._t); this._t=setTimeout(()=>this.setState({toast:null}),2600); }
+  money(n){ return n.toLocaleString('ru-RU')+'\u00A0\u20BD'; }
+  img(id){ return 'https://images.unsplash.com/photo-'+id+'?w=720&q=75&auto=format&fit=crop'; }
+  svcById(id){ return this.services.find(s=>s.id===id); }
+  ageStr(s){ return s.a1+'–'+s.a2+' лет'; }
+  hexA(h,a){ const n=parseInt(h.slice(1),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
+  heroPosters(){
+    const feat=[
+      {id:'1503095396549-807759245b35',title:'Кот в сапогах',st:'position:absolute;left:3%;top:14%;width:40%;height:76%;border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.85);transform:rotate(-7deg);z-index:1;box-shadow:0 16px 30px rgba(0,0,0,.32)'},
+      {id:'1444703686981-a3abbc4d4fe3',title:'Планетарий',st:'position:absolute;left:30%;top:0;width:44%;height:92%;border-radius:14px;overflow:hidden;border:3px solid #fff;transform:rotate(3deg);z-index:3;box-shadow:0 18px 36px rgba(0,0,0,.42)'},
+      {id:'1514525253161-7a46d19cd819',title:'Шоу пузырей',st:'position:absolute;left:58%;top:18%;width:38%;height:72%;border-radius:14px;overflow:hidden;border:3px solid rgba(255,255,255,.85);transform:rotate(9deg);z-index:2;box-shadow:0 16px 30px rgba(0,0,0,.32)'},
+    ];
+    return feat.map(f=>({img:this.img(f.id),title:f.title,style:f.st}));
+  }
+  heroStars(){
+    const defs=[
+      [40,11,15,1,0,4.2],[52,27,9,0,.6,3.4],[63,7,12,1,1.2,4.8],[73,39,8,0,.3,3.0],
+      [46,61,13,1,.9,4.5],[58,77,9,0,1.5,3.6],[81,19,14,1,.4,5.0],[88,57,10,0,1.1,3.8],
+      [34,41,8,1,1.8,4.0],[69,65,12,1,.7,4.6],[92,33,9,0,1.3,3.2],[50,47,7,0,2.0,3.5],
+      [78,72,11,1,1.6,4.4],[44,84,8,0,.5,3.7]
+    ];
+    return defs.map(([l,t,s,g,d,dur])=>{
+      const grad=g?'background:linear-gradient(135deg,#F5A524,#F472B6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 6px rgba(245,165,36,.55))':'color:rgba(255,255,255,.9);filter:drop-shadow(0 0 6px rgba(255,255,255,.45))';
+      return{char:g?'✦':'✧',style:'position:absolute;left:'+l+'%;top:'+t+'%;font-size:'+s+'px;line-height:1;pointer-events:none;'+grad+';animation:twinkle '+dur+'s ease-in-out infinite '+d+'s'};
+    });
+  }
+
+  navStyle(active){ return 'display:inline-flex;align-items:center;gap:6px;white-space:nowrap;border:0;border-radius:11px;padding:9px 15px;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;'+(active?'background:#211A2E;color:#fff;':'background:#fff;color:#3d3548;border:1px solid #EAE1D4;'); }
+
+  renderVals(){
+    const S=this.state, C=this.cats;
+    const r=S.route;
+    const isTeatr=S.role==='teatr';
+    const cat=k=>C[k]||C.theatre;
+    const acc=S.account;
+    const myOrgServices=(acc&&acc.type==='org'&&acc.services)?acc.services:[];
+    const SERVICES=myOrgServices.concat(this.services);
+    const ORGS=Object.assign({},this.orgs); if(acc&&acc.type==='org'&&acc.org) ORGS[acc.org.id]=acc.org;
+    const imgOf=(s)=> (s&&s.imgData)?s.imgData:this.img(s.img);
+    const coverOf=(o)=> (o&&o.coverData)?o.coverData:this.img(o.cover);
+    const authPillStyle=(on)=>'flex:1;border:0;border-radius:10px;padding:11px;font-family:Manrope;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s;'+(on?'background:#fff;color:#211A2E;box-shadow:0 1px 3px rgba(0,0,0,.12)':'background:transparent;color:#7a7186');
+
+    // ---- header tabs ----
+    const tab=(on)=>'border:0;border-radius:9px;padding:8px 14px;font-family:Manrope;font-weight:700;font-size:13.5px;cursor:pointer;transition:all .15s;'+(on?'background:#fff;color:#211A2E;box-shadow:0 1px 3px rgba(0,0,0,.12)':'background:transparent;color:#7a7186');
+
+    // ---- nav ----
+    let navItems;
+    if(!isTeatr){
+      navItems=[
+        {key:'vitrina',label:'Афиша',icon:'🎟️'},
+        {key:'cabinet',label:'Мои брони',icon:'📋'},
+      ];
+    } else {
+      navItems=[
+        {key:'teatr_home',label:'Мои услуги',icon:'🎭'},
+        {key:'clients',label:'Заказчики',icon:'🏫'},
+        {key:'teatr_calendar',label:'Календарь',icon:'📅'},
+        {key:'upload',label:'Документы',icon:'📄'},
+        {key:'teatr_cabinet',label:'Комиссия',icon:'💳',badge:S.paid?null:'1'},
+      ];
+    }
+    navItems=navItems.map(n=>({...n,active:r===n.key,style:this.navStyle(r===n.key),onClick:()=>this.go(n.key)}));
+
+    // ---- vitrina cards ----
+    const ageR={'3-5':[3,5],'6-8':[6,8],'9-12':[9,12]};
+    let list=SERVICES.filter(s=>{
+      if(S.fCat!=='all'&&s.cat!==S.fCat) return false;
+      if(S.fCity!=='all'&&s.city!==S.fCity) return false;
+      if(S.fVerified&&!s.verified) return false;
+      if(s.price>S.fPrice) return false;
+      if(S.fAge!=='all'){ const [lo,hi]=ageR[S.fAge]; if(!(s.a1<=hi&&s.a2>=lo)) return false; }
+      if(S.q){ const q=S.q.toLowerCase(); if(!(s.title.toLowerCase().includes(q)||s.org.toLowerCase().includes(q))) return false; }
+      return true;
+    });
+    const cards=list.map((s,idx)=>{const m=cat(s.cat);
+      const rn=Math.round(parseFloat(s.rating));
+      let badge=null;
+      if(s.reviews>=120) badge={label:'ХИТ',bg:'#F5A524',color:'#211A2E'};
+      else if(s.reviews<40) badge={label:'НОВИНКА',bg:'#14A89A',color:'#fff'};
+      return{
+        id:s.id,title:s.title,org:s.org,color:m.color,icon:m.icon,catLabel:m.label,
+        img:imgOf(s),verified:s.verified,rating:s.rating,reviews:s.reviews,price:this.money(s.price),
+        meta:this.ageStr(s)+' · '+s.dur+' мин · '+s.city,
+        starsFull:'★'.repeat(rn),starsEmpty:'★'.repeat(5-rn),
+        delay:(idx*0.05).toFixed(2)+'s',
+        shadow:'0 18px 34px '+this.hexA(m.color,0.3),
+        badge:!!badge, badgeLabel:badge?badge.label:'',
+        badgeStyle:badge?('position:absolute;top:11px;right:11px;font-family:Manrope;font-weight:800;font-size:10px;letter-spacing:.06em;padding:4px 9px;border-radius:7px;background:'+badge.bg+';color:'+badge.color+';box-shadow:0 2px 8px rgba(0,0,0,.25)'):'',
+        onOpen:()=>{this.setState({serviceId:s.id,orgId:s.orgId,fromOrg:false});this.go('card');}
+      };
+    });
+
+    const catChips=[{k:'all',label:'Все',icon:'✨'},{k:'theatre',label:'Театр',icon:'🎭'},{k:'show',label:'Шоу',icon:'🎪'},{k:'science',label:'Наука',icon:'🔭'},{k:'master',label:'Мастер-класс',icon:'🎨'}].map(c=>{
+      const on=S.fCat===c.k; const col=c.k==='all'?'#211A2E':cat(c.k).color;
+      return{...c,style:'display:inline-flex;align-items:center;gap:6px;white-space:nowrap;border-radius:30px;padding:9px 16px;font-family:Manrope;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s;'+(on?('background:'+col+';color:#fff;border:1px solid '+col):'background:#fff;color:#3d3548;border:1px solid #EAE1D4'),onClick:()=>this.setState({fCat:c.k})};
+    });
+
+    const ad=this.ads[S.adIdx];
+    const adDots=this.ads.map((a,i)=>({style:'width:7px;height:7px;border-radius:50%;display:inline-block;transition:all .2s;background:'+(i===S.adIdx?'#6D3B8E':'#D8CFC0')}));
+
+    // ---- selected service ----
+    const s=SERVICES.find(x=>x.id===S.serviceId)||SERVICES[0];
+    const sm=cat(s.cat);
+    const svc={
+      title:s.title,org:s.org,catLabel:sm.label,icon:sm.icon,color:sm.color,
+      img:imgOf(s),rating:s.rating,reviews:s.reviews,price:this.money(s.price),
+      desc:s.desc,includes:s.includes,conditions:s.conditions,
+      facts:[{k:'Возраст',v:this.ageStr(s)},{k:'Длительность',v:s.dur+' мин'},{k:'Город',v:s.city},{k:'Формат',v:'выездной'}],
+      checks:[
+        {icon:'🏛️',t:'Юрлицо проверено',s:'Действующая выписка ЕГРЮЛ / ЕГРИП'},
+        {icon:'📄',t:'Договор-оферта',s:'Работаем официально, с закрывающими'},
+        {icon:'🩺',t:'Медкнижки артистов',s:'Все прошли медосмотр — требование СанПиН'},
+        {icon:'🛡️',t:'Страховка ответственности',s:'На случай форс-мажора на площадке'},
+      ],
+    };
+
+    // ---- org ----
+    const o=ORGS[S.orgId]||ORGS.t1;
+    const om=cat(o.cat);
+    const dBadge=(st)=>{
+      if(st==='ok') return {badge:'✓ Проверено',badgeStyle:'background:#E7F4EE;color:#2E9E6B;font-weight:600;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;font-family:Manrope'};
+      if(st==='mod') return {badge:'⏳ Модерация',badgeStyle:'background:#FBF1DE;color:#b07d12;font-weight:600;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;font-family:Manrope'};
+      return {badge:'✕ Отклонён',badgeStyle:'background:#FBEAE8;color:#b53b30;font-weight:600;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;font-family:Manrope'};
+    };
+    const dIcon=t=>t.includes('ЕГР')?'🏛️':t.includes('Договор')?'📄':t.includes('Медкниж')||t.includes('Медосм')?'🩺':t.includes('страх')||t.includes('Страх')?'🛡️':t.includes('Пожар')?'🔥':t.includes('СанПиН')||t.includes('Сертиф')?'📋':'📎';
+    const org={
+      name:o.name,catLabel:om.label,color:om.color,desc:o.desc,territory:o.territory,years:o.years,
+      rating:o.rating,reviews:o.reviews,cover:coverOf(o),
+      docs:o.docs.map(d=>({type:d.type,date:d.date,icon:dIcon(d.type),...dBadge(d.status)})),
+      services:SERVICES.filter(x=>x.orgId===S.orgId).map(x=>({title:x.title,price:this.money(x.price),color:cat(x.cat).color,img:imgOf(x),onOpen:()=>{this.setState({serviceId:x.id,fromOrg:true});this.go('card');}})),
+      reviewList:o.reviewList.map(rv=>({garden:rv.garden,author:rv.author,text:rv.text,date:rv.date,stars:'★★★★★'.slice(0,rv.rating)+'☆☆☆☆☆'.slice(0,5-rv.rating)})),
+    };
+
+    // ---- calendar (July 2026) ----
+    const y=2026,mo=6;
+    const monthLabel='Июль 2026';
+    const weekHeads=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+    const first=new Date(y,mo,1);
+    const startDow=(first.getDay()+6)%7;
+    const days=new Date(y,mo+1,0).getDate();
+    const busy=[2,8,9,15,16,22,23,29];
+    const calCells=[];
+    for(let i=0;i<startDow;i++) calCells.push({day:'',disabled:true,style:'visibility:hidden;height:40px'});
+    for(let d=1;d<=days;d++){
+      const dow=new Date(y,mo,d).getDay();
+      const off=dow===0||dow===6;
+      const bz=busy.includes(d);
+      const sel=S.book.date===d;
+      let st='font-family:JetBrains Mono;font-size:14px;height:40px;border-radius:10px;border:1px solid #EAE1D4;cursor:pointer;transition:all .12s;';
+      let dis=false;
+      if(off){ st+='background:#F1ECE3;color:#c3bbac;cursor:not-allowed;border-color:transparent'; dis=true; }
+      else if(bz){ st+='background:#F1E2E0;color:#c08a84;cursor:not-allowed;border-color:transparent'; dis=true; }
+      else if(sel){ st='font-family:JetBrains Mono;font-size:14px;height:40px;border-radius:10px;border:0;cursor:pointer;background:#6D3B8E;color:#fff;font-weight:600;box-shadow:0 3px 8px rgba(109,59,142,.4)'; }
+      else { st+='background:#fff;color:#211A2E'; }
+      calCells.push({day:String(d),disabled:dis,style:st,onClick:dis?(()=>{}):(()=>this.setState({book:{...S.book,date:d}}))});
+    }
+    const slotsDef=[{t:'09:30',busy:false},{t:'11:00',busy:false},{t:'15:30',busy:true}];
+    const slots=slotsDef.map(sl=>{
+      const sel=S.book.time===sl.t;
+      let st='font-family:JetBrains Mono;font-size:14px;padding:11px 16px;border-radius:11px;cursor:pointer;white-space:nowrap;transition:all .12s;';
+      let dis=false;
+      if(sl.busy){ st+='background:#F1E2E0;color:#c08a84;border:1px solid transparent;cursor:not-allowed'; dis=true; }
+      else if(sel){ st+='background:#6D3B8E;color:#fff;border:1px solid #6D3B8E;font-weight:600'; }
+      else { st+='background:#fff;color:#211A2E;border:1px solid #EAE1D4'; }
+      return {label:sl.busy?(sl.t+' · занято'):sl.t,disabled:dis,style:st,onClick:dis?(()=>{}):(()=>this.setState({book:{...S.book,time:sl.t}}))};
+    });
+    const bookWhen=(S.book.date?(S.book.date+' июля'):'—')+(S.book.time?(', '+S.book.time):'');
+    const bookReady=!!(S.book.date&&S.book.time);
+
+    // ---- request / chat ----
+    const ar=S.activeReq;
+    const me=isTeatr?'teatr':'sad';
+    const chat=S.chat.map(m=>{
+      const mine=m.who===me;
+      return{
+        text:m.text,time:m.time,
+        rowStyle:'display:flex;'+(mine?'justify-content:flex-end':'justify-content:flex-start'),
+        bubbleStyle:'max-width:78%;padding:10px 14px;border-radius:15px;font-size:14px;line-height:1.45;'+(mine?'background:#6D3B8E;color:#fff;border-bottom-right-radius:4px':'background:#F1ECE3;color:#211A2E;border-bottom-left-radius:4px'),
+        timeStyle:'font-size:10px;margin-top:4px;'+(mine?'color:rgba(255,255,255,.6);text-align:right':'color:#a89fae'),
+      };
+    });
+    const stMap={draft:0,sent:1,negotiating:1,confirmed:2,done:3};
+    const stIdx=stMap[S.reqStatus]||0;
+    const stepLabels=['Отправлена','Согласование','Подтверждена','Проведена'];
+    const statusSteps=stepLabels.map((l,i)=>({label:l,style:'font-family:JetBrains Mono;font-size:11.5px;padding:5px 11px;border-radius:20px;white-space:nowrap;'+(i<stIdx?'background:#E7F4EE;color:#2E9E6B':i===stIdx?'background:#6D3B8E;color:#fff':'background:#F1ECE3;color:#a89fae')}));
+    const statusInfo=S.reqStatus==='confirmed'?{l:'Подтверждена',c:'background:#E7F4EE;color:#2E9E6B'}:{l:'На согласовании',c:'background:#FBF1DE;color:#b07d12'};
+    const fee=ar?Math.round(ar.price*0.1):0;
+    const cond=ar?{service:ar.service,garden:ar.garden,when:ar.when,kids:String(ar.kids),venue:ar.venue,price:this.money(ar.price),fee:this.money(fee)}:{service:'—',garden:'—',when:'—',kids:'—',venue:'—',price:'—',fee:'—'};
+
+    // ---- cabinet (sad) ----
+    const bookings=S.bookings.map((b,i)=>{
+      const m=cat(b.cat);
+      const done=b.status==='Проведена';
+      const conf=b.status==='Подтверждена';
+      const sc=done?'background:#EFEAF4;color:#6D3B8E':conf?'background:#E7F4EE;color:#2E9E6B':'background:#FBF1DE;color:#b07d12';
+      const svcObj=SERVICES.find(x=>x.title===b.title);
+      return{title:b.title,org:b.org,color:m.color,img:svcObj?imgOf(svcObj):this.img('1503095396549-807759245b35'),
+        meta:b.date+' · '+b.time+' · '+b.kids+' детей · '+this.money(b.price),
+        status:b.status,statusStyle:'font-family:Manrope;font-weight:600;font-size:11.5px;padding:5px 10px;border-radius:7px;white-space:nowrap;'+sc,
+        canReview:done,onReview:()=>this.toast('Спасибо! Ваш отзыв отправлен театру ★')};
+    });
+    const sadSpentN=S.bookings.reduce((a,b)=>a+b.price,0);
+
+    // ---- teatr home ----
+    const myDef=[
+      {id:'s1',bookings:7},{id:'s2',bookings:4},{id:'s11',bookings:2},
+    ];
+    const baseMy=(acc&&acc.type==='org'&&acc.services&&acc.services.length)?acc.services:this.services.filter(x=>['s1','s2'].includes(x.id)||x.orgId==='t1').slice(0,3);
+    const myServices=baseMy.map((x)=>{
+      const paused=!!S.paused[x.id];
+      const bn=({s1:7,s2:4})[x.id]||x.bookings||0;
+      return{title:x.title,color:cat(x.cat).color,img:imgOf(x),price:this.money(x.price),bookings:bn,
+        toggleLabel:paused?'На паузе':'Активна',
+        toggleStyle:'border:0;border-radius:9px;padding:8px 14px;font-family:Manrope;font-weight:600;font-size:12.5px;cursor:pointer;'+(paused?'background:#F1ECE3;color:#8a8194':'background:#E7F4EE;color:#2E9E6B'),
+        onToggle:()=>this.setState(st=>({paused:{...st.paused,[x.id]:!st.paused[x.id]}}))};
+    });
+    const newReqDef=[
+      {garden:'Детский сад №34',service:'Кот в сапогах',price:18000,date:18,time:'11:00',kids:25,venue:'Музыкальный зал'},
+      {garden:'Школа №12',service:'Снежная королева',price:22000,date:25,time:'10:00',kids:30,venue:'Актовый зал'},
+    ];
+    const newRequests=newReqDef.map((rq,i)=>({garden:rq.garden,service:rq.service,kids:rq.kids,when:rq.date+' июля',
+      onOpen:()=>this.openTeatrReq(rq)}));
+
+    // ---- teatr calendar ----
+    const tBook={3:{g:'Детский сад №34',s:'Шоу пузырей',t:'11:00'},7:{g:'Школа №12',s:'Кот в сапогах',t:'10:00'},10:{g:'Сад «Радуга»',s:'Планетарий',t:'09:30'},17:{g:'Гимназия №7',s:'Снежная королева',t:'11:00'},24:{g:'Сад №51',s:'Научное шоу',t:'15:30'}};
+    const tCalCells=[];
+    for(let i=0;i<startDow;i++) tCalCells.push({day:'',style:'visibility:hidden;height:42px'});
+    for(let d=1;d<=days;d++){
+      const bk=tBook[d];
+      let st='position:relative;font-family:JetBrains Mono;font-size:14px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:10px;'+(bk?'background:#EFEAF4;color:#6D3B8E;font-weight:600;border:1px solid #d8c9e6':'background:#fff;color:#bbb3a6;border:1px solid #F1ECE3');
+      tCalCells.push({day:String(d),booked:!!bk,style:st});
+    }
+    const tBookings=Object.keys(tBook).map(d=>({day:d,garden:tBook[d].g,service:tBook[d].s,time:tBook[d].t}));
+
+    // ---- docs upload ----
+    const docs2=S.docs2.map(d=>({type:d.type,date:d.date,icon:dIcon(d.type),...dBadge(d.status)}));
+
+    // ---- commission ----
+    const turnover=246000, rate=0.1;
+    const debtN=S.paid?0:Math.round(turnover*rate);
+    const com={done:'14',turnover:this.money(turnover),debt:S.paid?this.money(0):this.money(24600)};
+    const payHistory=[
+      ...(S.paid?[{label:'Комиссия · Июль 2026',id:'GAS-2026-07-'+(1000+Math.floor(Math.random()*9000)),amount:this.money(24600)}]:[]),
+      {label:'Комиссия · Июнь 2026',id:'GAS-2026-06-4821',amount:this.money(21300)},
+      {label:'Комиссия · Май 2026',id:'GAS-2026-05-3940',amount:this.money(18750)},
+    ];
+
+    return {
+      no:false,
+      goHome:()=>this.go(isTeatr?'teatr_home':'vitrina'),
+      setSad:()=>{this.setState({role:'sad'});this.go('vitrina');},
+      setTeatr:()=>{this.setState({role:'teatr'});this.go('teatr_home');},
+      tabSadStyle:tab(!isTeatr), tabTeatrStyle:tab(isTeatr),
+      navItems,
+      // routes
+      isVitrina:r==='vitrina', isCard:r==='card', isOrg:r==='org', isBooking:r==='booking',
+      isRequest:r==='request', isCabinet:r==='cabinet', isTHome:r==='teatr_home',
+      isTCal:r==='teatr_calendar', isUpload:r==='upload', isTCab:r==='teatr_cabinet',
+      // vitrina
+      q:S.q, onQ:e=>this.setState({q:e.target.value}),
+      scrollGrid:()=>{const el=document.getElementById('gridanchor');if(el)window.scrollBy({top:el.getBoundingClientRect().top-90,behavior:'smooth'});},
+      catChips, ad, adIdx:S.adIdx, adDots, cards,
+      heroTrust:['📄 Договор-оферта','💳 Безнал и закрывающие','🩺 Медкнижки артистов','🛡️ Страховка'],
+      heroPosters:this.heroPosters(),
+      heroStars:this.heroStars(),
+      steps:[
+        {n:'1',t:'Выбрали программу',s:'Афиша проверенных команд под ваш возраст и бюджет',bg:'#6D3B8E',delay:'0s'},
+        {n:'2',t:'Согласовали в чате',s:'Дата, площадка, число детей — театр подтверждает',bg:'#F5A524',delay:'.08s'},
+        {n:'3',t:'Провели и оплатили',s:'Безнал, договор и закрывающие документы',bg:'#2E9E6B',delay:'.16s'},
+      ],
+      verifiedTitle:'«Проверено» — платформа проверила юрлицо (ЕГРЮЛ), договор-оферту, медкнижки артистов и страховку ответственности',
+      fAge:S.fAge, onAge:e=>this.setState({fAge:e.target.value}),
+      fCity:S.fCity, onCity:e=>this.setState({fCity:e.target.value}),
+      fPrice:S.fPrice, onPrice:e=>this.setState({fPrice:+e.target.value}), priceLabel:this.money(S.fPrice),
+      toggleVerified:()=>this.setState({fVerified:!S.fVerified}),
+      verifiedStyle:'border-radius:30px;padding:9px 15px;font-family:Manrope;font-weight:600;font-size:13.5px;cursor:pointer;transition:all .15s;'+(S.fVerified?'background:#2E9E6B;color:#fff;border:1px solid #2E9E6B':'background:#fff;color:#3d3548;border:1px solid #EAE1D4'),
+      resultCount:cards.length+' '+this.plural(cards.length,'программа','программы','программ'),
+      noResults:cards.length===0,
+      // card
+      svc, backVitrina:()=>this.go('vitrina'),
+      openOrgFromCard:()=>{this.setState({orgId:s.orgId});this.go('org');},
+      gotoBook:()=>this.go('booking'),
+      // org
+      org, backFromOrg:()=>this.go(S.fromOrg?'card':'vitrina'),
+      // booking
+      monthLabel, weekHeads, calCells, slots, kids:S.book.kids,
+      kidsInc:()=>this.setState({book:{...S.book,kids:Math.min(60,S.book.kids+1)}}),
+      kidsDec:()=>this.setState({book:{...S.book,kids:Math.max(5,S.book.kids-1)}}),
+      venue:S.book.venue, onVenue:e=>this.setState({book:{...S.book,venue:e.target.value}}),
+      bookWhen, backToCard:()=>this.go('card'),
+      bookDisabled:!bookReady,
+      sendBtnStyle:'width:100%;border:0;border-radius:12px;padding:15px;font-family:Manrope;font-weight:700;font-size:16px;cursor:'+(bookReady?'pointer':'not-allowed')+';'+(bookReady?'background:#F5A524;color:#211A2E;box-shadow:0 3px 0 #c8821a':'background:#3a3348;color:#6f6878'),
+      sendRequest:()=>{ if(!bookReady){this.toast('Выберите дату и время');return;} this.submitSadReq(s); },
+      // request
+      reqNum:ar?ar.num:'—', statusLabel:statusInfo.l,
+      statusBadgeStyle:'font-family:Manrope;font-weight:700;font-size:12px;padding:6px 12px;border-radius:8px;'+statusInfo.c,
+      statusSteps, chat, chatInput:S.chatInput, typing:S.typing,
+      chatAvatar:isTeatr?'🏫':'🎭', chatTitle:ar?(isTeatr?ar.garden:ar.org):'—',
+      onChatType:e=>this.setState({chatInput:e.target.value}),
+      onChatKey:e=>{if(e.key==='Enter')this.chatSend();},
+      chatSend:()=>this.chatSend(),
+      cond, conflict:false,
+      showActions:S.reqStatus!=='confirmed', isConfirmed:S.reqStatus==='confirmed',
+      approveLabel:isTeatr?'Подтвердить заявку':'Согласовать условия',
+      approve:()=>this.approveReq(),
+      editCond:()=>this.toast('Открыт чат — предложите свои условия театру'),
+      backFromReq:()=>this.go(isTeatr?'teatr_home':'cabinet'),
+      // cabinet sad
+      bookings, sadCount:String(S.bookings.length), sadSpent:this.money(sadSpentN),
+      // teatr home
+      tActiveCount:String(myServices.filter(m=>m.toggleLabel==='Активна').length), tNewCount:String(newRequests.length),
+      newRequests, myServices,
+      // teatr cal
+      tCalCells, tBookings,
+      // upload
+      docs2, onDrop:()=>this.simUpload(),
+      // commission
+      com, paid:S.paid, debtUnpaid:!S.paid,
+      debtCardStyle:'border-radius:15px;padding:18px;'+(S.paid?'background:#E7F4EE;border:1px solid #2E9E6B;color:#237a51':'background:#211A2E;color:#fff'),
+      openPay:()=>this.setState({payOpen:true,payStep:'form'}),
+      payHistory,
+      // pay modal
+      payOpen:S.payOpen, payForm:S.payStep==='form', payProcessing:S.payStep==='processing', payDone:S.payStep==='done',
+      closePay:()=>this.setState({payOpen:false}), stop:e=>e.stopPropagation(),
+      doPay:()=>this.doPay(),
+      receipt:{id:'GAS-2026-07-'+(this._rid||(this._rid=1000+Math.floor(Math.random()*8999))),date:new Date().toLocaleDateString('ru-RU')},
+      // account / auth / onboard / profile / clients
+      loggedIn:!!acc, loggedOut:!acc,
+      accIcon:acc?(acc.type==='org'?'🎭':'🏫'):'👤', accName:acc?acc.name:'', accRole:acc?(acc.type==='org'?'организатор':'заказчик'):'',
+      goAuth:()=>this.goAuth(), goProfile:()=>this.go('profile'), logout:()=>this.logout(), goVitrinaPlain:()=>this.go('vitrina'),
+      isAuth:r==='auth', isOnboard:r==='onboard', isProfile:r==='profile', isClients:r==='clients',
+      tHomeName:(acc&&acc.type==='org'&&acc.org)?acc.org.name:'Театр «Балаганчик»',
+      cabSub:(acc&&acc.type==='client'&&acc.inst)?(acc.inst.name+(acc.inst.city?(', '+acc.inst.city):'')):'Детский сад №34, Москва',
+      isReg:S.authTab==='register',
+      authTitle:S.authTab==='register'?'Регистрация':'С возвращением',
+      authSub:S.authTab==='register'?'Создайте аккаунт за минуту':'Войдите в свой кабинет',
+      authBtn:S.authTab==='register'?'Продолжить':'Войти',
+      tabReg:()=>this.setState({authTab:'register'}), tabLogin:()=>this.setState({authTab:'login'}),
+      tabRegStyle:authPillStyle(S.authTab==='register'), tabLoginStyle:authPillStyle(S.authTab==='login'),
+      afName:S.af.name, onAfName:e=>this.setState({af:Object.assign({},S.af,{name:e.target.value})}),
+      afEmail:S.af.email, onAfEmail:e=>this.setState({af:Object.assign({},S.af,{email:e.target.value})}),
+      afPass:S.af.pass, onAfPass:e=>this.setState({af:Object.assign({},S.af,{pass:e.target.value})}),
+      doAuth:()=>this.doAuth(),
+      inputStyle:'font-family:Manrope;font-size:15px;border:1px solid #EAE1D4;border-radius:11px;padding:12px 13px;background:#FBF7F0;color:#211A2E;outline:none;width:100%',
+      labStyle:'display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#3d3548',
+      selStyle:'font-family:Manrope;font-size:15px;border:1px solid #EAE1D4;border-radius:11px;padding:12px 13px;background:#FBF7F0;color:#211A2E;cursor:pointer;width:100%',
+      areaStyle:'font-family:Manrope;font-size:15px;border:1px solid #EAE1D4;border-radius:11px;padding:12px 13px;background:#FBF7F0;color:#211A2E;outline:none;min-height:84px;resize:vertical;width:100%',
+      obChoose:S.obStep==='choose', obOrg:S.obStep==='org', obClient:S.obStep==='client',
+      pickOrg:()=>this.setState({obStep:'org'}), pickClient:()=>this.setState({obStep:'client'}), obBack:()=>this.setState({obStep:'choose'}),
+      obOrgName:S.ob.orgName, onOrgName:e=>this.setOb('orgName',e.target.value),
+      obOrgCat:S.ob.orgCat, onOrgCat:e=>this.setOb('orgCat',e.target.value),
+      obOrgCity:S.ob.orgCity, onOrgCity:e=>this.setOb('orgCity',e.target.value),
+      obOrgTerr:S.ob.orgTerr, onOrgTerr:e=>this.setOb('orgTerr',e.target.value),
+      obOrgDesc:S.ob.orgDesc, onOrgDesc:e=>this.setOb('orgDesc',e.target.value),
+      onOrgCover:e=>this.onFile('orgCover',e), obHasCover:!!S.ob.orgCover, obNoCover:!S.ob.orgCover, obCoverData:S.ob.orgCover||'',
+      obProgTitle:S.ob.progTitle, onProgTitle:e=>this.setOb('progTitle',e.target.value),
+      obProgAge:S.ob.progAge, onProgAge:e=>this.setOb('progAge',e.target.value),
+      obProgPrice:S.ob.progPrice, onProgPrice:e=>this.setOb('progPrice',e.target.value),
+      onProgCover:e=>this.onFile('progCover',e), obHasProgCover:!!S.ob.progCover, obNoProgCover:!S.ob.progCover, obProgData:S.ob.progCover||'',
+      saveOrg:()=>this.saveOrg(),
+      obInstType:S.ob.instType, onInstType:e=>this.setOb('instType',e.target.value),
+      obInstName:S.ob.instName, onInstName:e=>this.setOb('instName',e.target.value),
+      obInstCity:S.ob.instCity, onInstCity:e=>this.setOb('instCity',e.target.value),
+      obInstAddr:S.ob.instAddr, onInstAddr:e=>this.setOb('instAddr',e.target.value),
+      obInstContact:S.ob.instContact, onInstContact:e=>this.setOb('instContact',e.target.value),
+      obInstKids:S.ob.instKids, onInstKids:e=>this.setOb('instKids',e.target.value),
+      onInstPhoto:e=>this.onFile('instPhoto',e), obHasInstPhoto:!!S.ob.instPhoto, obNoInstPhoto:!S.ob.instPhoto, obInstData:S.ob.instPhoto||'',
+      saveClient:()=>this.saveClient(),
+      profName:acc?(acc.type==='org'?(acc.org?acc.org.name:acc.name):(acc.inst?acc.inst.name:acc.name)):'',
+      profSub:acc?(acc.type==='org'?('Организатор · '+(acc.org?cat(acc.org.cat).label:'')):((acc.inst?acc.inst.type:'Заказчик')+(acc.inst&&acc.inst.city?(', '+acc.inst.city):''))):'',
+      profPhoto:acc?(acc.type==='org'?((acc.org&&acc.org.coverData)||''):((acc.inst&&acc.inst.photo)||'')):'',
+      profHasPhoto:!!(acc&&((acc.type==='org'&&acc.org&&acc.org.coverData)||(acc.type==='client'&&acc.inst&&acc.inst.photo))),
+      profNoPhoto:!(acc&&((acc.type==='org'&&acc.org&&acc.org.coverData)||(acc.type==='client'&&acc.inst&&acc.inst.photo))),
+      profActions:(acc&&acc.type==='org')?[{icon:'🎭',label:'Мои услуги',onClick:()=>this.go('teatr_home')},{icon:'🏫',label:'Заказчики',onClick:()=>this.go('clients')},{icon:'📄',label:'Документы',onClick:()=>this.go('upload')},{icon:'💳',label:'Комиссия',onClick:()=>this.go('teatr_cabinet')}]:[{icon:'🎟️',label:'Афиша',onClick:()=>this.go('vitrina')},{icon:'📋',label:'Мои брони',onClick:()=>this.go('cabinet')}],
+      profActStyle:'text-align:left;background:#fff;border:1px solid #EAE1D4;border-radius:14px;padding:16px 18px;font-family:Manrope;font-weight:600;font-size:14.5px;cursor:pointer',
+      clientsList:this.buildClients(acc).map(c=>Object.assign({},c,{onSuggest:()=>this.toast('Предложение выезда отправлено: '+c.name)})),
+      // toast
+      toast:S.toast,
+    };
+  }
+
+  plural(n,a,b,c){ n=Math.abs(n)%100; const n1=n%10; if(n>10&&n<20)return c; if(n1>1&&n1<5)return b; if(n1===1)return a; return c; }
+
+  seedChat(service,isTeatrView){
+    return [
+      {who:'teatr',time:'14:02',text:'Здравствуйте! Готовы приехать с программой «'+service+'». Привозим декорации, костюмы и звук. Нужна площадка от 4×3 м и розетка 220В.'},
+      {who:'sad',time:'14:08',text:'Добрый день! Подойдёт музыкальный зал. Уложитесь в 45 минут?'},
+      {who:'teatr',time:'14:10',text:'Да, спектакль идёт 45 минут плюс 30 минут на монтаж. Всё включено в стоимость, доплат нет.'},
+    ];
+  }
+  submitSadReq(s){
+    const acc=this.state.account;
+    const myName=(acc&&acc.type==='client'&&acc.inst&&acc.inst.name)?acc.inst.name:'Детский сад №34';
+    const ar={num:'7',service:s.title,org:s.org,garden:myName,
+      when:this.state.book.date+' июля, '+this.state.book.time, kids:this.state.book.kids,
+      venue:this.state.book.venue, price:s.price};
+    this.setState({activeReq:ar,chat:this.seedChat(s.title,false),reqStatus:'sent',chatInput:''});
+    this.go('request');
+  }
+  openTeatrReq(rq){
+    const ar={num:rq.date===18?'12':'13',service:rq.service,org:'Театр «Балаганчик»',garden:rq.garden,
+      when:rq.date+' июля, '+rq.time, kids:rq.kids, venue:rq.venue, price:rq.price};
+    this.setState({activeReq:ar,chat:this.seedChat(rq.service,true),reqStatus:'sent',chatInput:''});
+    this.go('request');
+  }
+  chatSend(){
+    const txt=this.state.chatInput.trim(); if(!txt)return;
+    const me=this.state.role==='teatr'?'teatr':'sad';
+    const t=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+    this.setState(s=>({chat:[...s.chat,{who:me,time:t,text:txt}],chatInput:'',typing:true}));
+    clearTimeout(this._reply);
+    this._reply=setTimeout(()=>{
+      const other=me==='teatr'?'sad':'teatr';
+      const reply=other==='teatr'?'Принято! Подтверждаем дату и условия. До встречи на празднике 🎭':'Спасибо, всё устраивает! Ждём вас.';
+      const t2=new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+      this.setState(s=>({chat:[...s.chat,{who:other,time:t2,text:reply}],typing:false}));
+    },1600);
+  }
+  approveReq(){
+    this.setState({reqStatus:'confirmed'});
+    if(this.state.role==='sad'){
+      const ar=this.state.activeReq;
+      const exists=this.state.bookings.some(b=>b.title===ar.service&&b.date===ar.when.split(',')[0]);
+      if(!exists){
+        const svc=this.services.find(x=>x.title===ar.service);
+        this.setState(s=>({bookings:[{title:ar.service,org:ar.org,cat:svc?svc.cat:'theatre',date:ar.when.split(',')[0],time:ar.when.split(', ')[1]||'',kids:ar.kids,price:ar.price,status:'Подтверждена'},...s.bookings]}));
+      }
+      this.toast('Заявка подтверждена ✓ — добавлена в «Мои брони»');
+    } else {
+      this.toast('Заявка подтверждена ✓ — дата в календаре');
+    }
+  }
+  simUpload(){
+    this.setState(s=>({docs2:[...s.docs2,{type:'Новый документ.pdf',date:'загружен только что',status:'mod'}]}));
+    this.toast('Файл загружен — отправлен на модерацию');
+  }
+  doPay(){
+    this.setState({payStep:'processing'});
+    setTimeout(()=>{ this.setState({payStep:'done',paid:true}); },1500);
+  }
+  loadAccount(){ try{ return JSON.parse(localStorage.getItem('gastroli_account'))||null; }catch(e){ return null; } }
+  persist(){ try{ localStorage.setItem('gastroli_account', JSON.stringify(this.state.account)); }catch(e){} }
+  goAuth(){ this.setState({authTab:'register',af:{name:'',email:'',pass:''}}); this.go('auth'); }
+  doAuth(){
+    const af=this.state.af;
+    if(!af.email||!af.pass){ this.toast('Заполните почту и пароль'); return; }
+    if(this.state.authTab==='login'){
+      const a=this.loadAccount();
+      if(a&&a.email===af.email){ this.setState({account:a,role:a.type==='org'?'teatr':'sad'}); this.toast('С возвращением!'); this.go(a.type==='org'?'teatr_home':'vitrina'); }
+      else { this.toast('Аккаунт не найден, зарегистрируйтесь'); this.setState({authTab:'register'}); }
+      return;
+    }
+    if(af.pass.length<4){ this.toast('Пароль минимум 4 символа'); return; }
+    this._pending={name:af.name||'Гость',email:af.email};
+    this.setState({obStep:'choose'}); this.go('onboard');
+  }
+  onFile(field,e){ const f=e.target.files&&e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>this.setState(s=>({ob:Object.assign({},s.ob,{[field]:r.result})})); r.readAsDataURL(f); }
+  setOb(k,v){ this.setState(s=>({ob:Object.assign({},s.ob,{[k]:v})})); }
+  saveOrg(){
+    const o=this.state.ob;
+    if(!o.orgName){ this.toast('Введите название коллектива'); return; }
+    const id='u_'+Date.now();
+    const ap=(o.progAge||'3-7').split('-');
+    const svc={id:'us_'+Date.now(),title:o.progTitle||'Новая программа',org:o.orgName,orgId:id,cat:o.orgCat,
+      a1:(+ap[0])||3,a2:(+ap[1])||7,price:(+o.progPrice)||15000,dur:45,city:o.orgCity||'Москва',
+      rating:'5.0',reviews:0,verified:false,img:'1503095396549-807759245b35',imgData:o.progCover||null,
+      desc:o.orgDesc||'Выездная программа для детей.',includes:this._inc,conditions:this._con};
+    const org={id,name:o.orgName,cat:o.orgCat,rating:'5.0',reviews:0,territory:o.orgTerr||o.orgCity||'Москва',
+      years:'на платформе с 2026',cover:'1507924538820-ede94a04019d',coverData:o.orgCover||null,
+      desc:o.orgDesc||'Новый коллектив на платформе.',
+      docs:[{type:'Договор оферты',date:'на модерации',status:'mod'}],reviewList:[]};
+    const account={type:'org',name:(this._pending&&this._pending.name)||o.orgName,email:(this._pending&&this._pending.email)||'',org,services:[svc]};
+    this.setState({account,role:'teatr'},()=>this.persist());
+    this.toast('Готово! Ваша программа в афише');
+    this.go('teatr_home');
+  }
+  saveClient(){
+    const o=this.state.ob;
+    if(!o.instName){ this.toast('Введите название учреждения'); return; }
+    const inst={type:o.instType,name:o.instName,city:o.instCity||'Москва',addr:o.instAddr||'',photo:o.instPhoto||null,contact:o.instContact||'',kids:o.instKids||''};
+    const account={type:'client',name:(this._pending&&this._pending.name)||o.instName,email:(this._pending&&this._pending.email)||'',inst};
+    this.setState({account,role:'sad'},()=>this.persist());
+    this.toast('Профиль сохранён, приятного выбора!');
+    this.go('vitrina');
+  }
+  logout(){ try{localStorage.removeItem('gastroli_account');}catch(e){} this.setState({account:null,role:'sad'}); this.toast('Вы вышли из аккаунта'); this.go('vitrina'); }
+  buildClients(acc){
+    const seed=[
+      {type:'Детский сад',name:'Детский сад №34',city:'Москва',addr:'ул. Лесная, 12',kids:'180'},
+      {type:'Школа',name:'Школа №1287',city:'Москва',addr:'пр. Мира, 44',kids:'620'},
+      {type:'Лагерь',name:'Лагерь «Солнышко»',city:'Химки',addr:'Лесопарковая, 3',kids:'240'},
+      {type:'Центр развития',name:'Центр «Растишка»',city:'Мытищи',addr:'ул. Юбилейная, 7',kids:'90'},
+    ];
+    let list=seed.slice();
+    if(acc&&acc.type==='client'&&acc.inst){ list=[Object.assign({mine:true},acc.inst)].concat(list); }
+    const tcolor={'Детский сад':'#F5A524','Школа':'#6D3B8E','Лагерь':'#14A89A','Центр развития':'#F2685E'};
+    const ticon={'Детский сад':'🧸','Школа':'🎒','Лагерь':'⛺','Центр развития':'✏️'};
+    return list.map(c=>({type:c.type,name:c.name,city:c.city||'',addr:c.addr||'',kids:c.kids||'',
+      photo:c.photo||'',hasPhoto:!!c.photo,noPhoto:!c.photo,
+      typeColor:tcolor[c.type]||'#6D3B8E',icon:ticon[c.type]||'🏫',mine:!!c.mine}));
+  }
+}
+</script>
+</body>
+</html>
